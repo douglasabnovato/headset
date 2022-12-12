@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import image from "./assets/headphone.png"
 
 export const Main = styled.div`
     position: absolute;
@@ -26,7 +27,7 @@ export const Container = styled.div`
 export const Image = styled.div` 
     width: 249px;
     height: 223px;
-    background: url(./assets/headphone.png);
+    background-image: url(${image});
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -130,6 +131,7 @@ export const ButtonAdd = styled.button`
     order: 2;
     align-self: stretch;
     flex-grow: 0;
+    cursor: pointer;
 `;
 
 export const Ball = styled.div` 
@@ -171,6 +173,7 @@ export const ButtonCart = styled.button`
     flex: none;
     order: 0;
     flex-grow: 1;
+    cursor: pointer;
 `;
 
 export const ButtonWishlist = styled.button` 
@@ -188,5 +191,6 @@ export const ButtonWishlist = styled.button`
     flex: none;
     order: 1;
     flex-grow: 1;
+    cursor: pointer;
 `;
 
