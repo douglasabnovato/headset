@@ -7,6 +7,7 @@ import dark from './styles/themes/dark';
 
 import GlobalStyle from './styles/global';
 import Header from './components/Header';
+import Headset from './components/Headset';
 
 const App = () => {
   const [theme, setTheme] = usePeristedState<DefaultTheme>('theme', light);
@@ -20,6 +21,7 @@ const App = () => {
       <div className="App">
         <GlobalStyle />
         <Header toggleTheme={toggleTheme} />
+        <Headset />
       </div>
     </ThemeProvider>
   );
