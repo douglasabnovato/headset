@@ -1,7 +1,6 @@
 import React from 'react';
 import {
     Main,
-    Container,
     Image,
     Details,
     ButtonCart,
@@ -19,7 +18,6 @@ import {
 function Headset() {
     return (
         <Main>
-            <Container>
 
                 <Image>
                 </Image>
@@ -35,7 +33,6 @@ function Headset() {
                     <ButtonCart>Add to cart</ButtonCart><ButtonWishlist>Add to wishlist</ButtonWishlist>
                 </Details>
 
-            </Container>
         </Main>
     );
 };

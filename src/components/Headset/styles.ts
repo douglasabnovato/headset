@@ -12,17 +12,6 @@ export const Main = styled.div`
     border-radius: 15px;
 `;
 
-export const Container = styled.div`
-    position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 32px;
-    width: 723px;
-    height: 497px;
-    color: #000000
-`;
 
 export const Image = styled.div` 
     width: 249px;

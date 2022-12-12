@@ -6,6 +6,6 @@
 
 #### Tarefas
 
-- [ ] desenhar os elementos
+- [x] desenhar os elementos
 - [ ] posicionar os elementos
 - [ ] ajustar a estilização
