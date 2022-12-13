@@ -3,8 +3,7 @@ import {
     Main,
     Image,
     Details,
-    ButtonCart,
-    ButtonWishlist,
+    Buttons,
     Stock,
     Ball,
     ButtonAdd,
@@ -25,12 +24,15 @@ function Headset() {
                 <Details>
                     <Shipping>Free shipping</Shipping>
                     <Title>Razer Kraken Kitty Edt Gaming Headset Quartz</Title>
-                    <PriceOff>price off</PriceOff>
+                    <PriceOff>1.599,00</PriceOff>
                     <PriceOn>799,00</PriceOn>
                     <Offer>The offer is valid until April 3 or as long as stock lasts!</Offer>
                     <ButtonAdd>Add to cart</ButtonAdd>
                     <Stock><Ball />50+ pcs. in stock.</Stock>
-                    <ButtonCart>Add to cart</ButtonCart><ButtonWishlist>Add to wishlist</ButtonWishlist>
+                    <Buttons>
+                        <button> Add to cart</button>
+                        <button>Add to wishlist</button>
+                    </Buttons>
                 </Details>
 
         </Main>
