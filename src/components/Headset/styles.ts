@@ -2,14 +2,19 @@ import styled from 'styled-components';
 import image from "./assets/headphone.png"
 
 export const Main = styled.div`
-    position: absolute;
+    position: relative;
+    display: flex;    
+`;
+
+export const Container = styled.div`
+    position: relative;
     display: flex;
+    margin: 3vh auto;
     width: 887px;
     height: 661px;
     background: #FFFFFF;
     box-shadow: 0px 24px 28px 9px rgba(179, 193, 217, 0.33);
     border-radius: 15px;
-    margin: 0 auto;
 `;
 
 export const Image = styled.div`
