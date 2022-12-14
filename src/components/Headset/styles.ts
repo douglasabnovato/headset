@@ -138,17 +138,19 @@ export const ButtonAdd = styled.button`
 
 export const Stock = styled.p` 
     display: flex;
+    flex-direction: row;
+    align-items: center;
     height: 21px;
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
     line-height: 21px;
-    color: #000000;
     flex: none;
     order: 1;
     flex-grow: 0;
     margin-block: 1vh;
+    color: #000000;
 `;
 
 export const Ball = styled.div` 
@@ -159,7 +161,7 @@ export const Ball = styled.div`
     flex: none;
     order: 0;
     flex-grow: 0;
-    margin-inline-end: .5vw;
+    margin-inline-end: .3vw;
 `;
 
 export const IconCart = styled.div`
