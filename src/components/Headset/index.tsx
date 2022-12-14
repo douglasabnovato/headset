@@ -33,7 +33,7 @@ function Headset() {
                     <Stock><Ball />50+ pcs. in stock.</Stock>
                     <Buttons>
                         <button>
-                            <IconCart /> Add to cart</button>
+                            <IconCart />Add to cart</button>
                         <button>
                             <IconWishlist />Add to wishlist</button>
                     </Buttons>

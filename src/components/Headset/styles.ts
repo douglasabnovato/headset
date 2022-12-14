@@ -52,8 +52,14 @@ export const Shipping = styled.p`
     top: 0px;
     background: #191847;
     border-radius: 20px;
-    color: #FFFFFF;
     margin-block-end: 1vh;
+
+    color: #FFFFFF;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
 `;
 
 export const Title = styled.h2` 
@@ -72,47 +78,52 @@ export const Title = styled.h2`
 export const PriceOff = styled.p`
     width: 54px;
     height: 21px;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 21px;
     text-decoration-line: line-through;
     color: #191847;
     flex: none;
     order: 0;
     flex-grow: 0;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+
     margin-block-start: 3vh;
 `;
 
 export const PriceOn = styled.p` 
     width: 120px;
     height: 72px;
+
+    color: #191847;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    
     font-family: 'Poppins';
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
     line-height: 72px;
-    color: #191847;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
 `;
 
 export const Offer = styled.p` 
     width: 369px;
     height: 21px;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 21px;
+    
     color: #191847;
     opacity: 0.6;
     flex: none;
     order: 2;
     flex-grow: 0;
-    margin-block: 1vh;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
 `;
 
 export const ButtonAdd = styled.button` 
@@ -121,7 +132,8 @@ export const ButtonAdd = styled.button`
     justify-content: center;
     align-items: center;
     align-self: stretch;
-    padding: 16px;    
+    padding: 16px;   
+    gap: 10px; 
     width: 442px;
     height: 59px;
     background: #4788E9;
@@ -134,6 +146,12 @@ export const ButtonAdd = styled.button`
     cursor: pointer;
     color: #FFFFFF;
     margin-block: 3vh;
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
 `;
 
 export const Stock = styled.p` 
@@ -141,16 +159,17 @@ export const Stock = styled.p`
     flex-direction: row;
     align-items: center;
     height: 21px;
-    font-family: 'Poppins';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 21px;
     flex: none;
     order: 1;
     flex-grow: 0;
     margin-block: 1vh;
     color: #000000;
+    
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
 `;
 
 export const Ball = styled.div` 
@@ -202,5 +221,15 @@ export const Buttons = styled.button`
         flex-grow: 1;
         cursor: pointer;
         margin: 6px;
+
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 27px;
+        color: #191847;
+        flex: none;
+        order: 1;
+        flex-grow: 0;
     }
 `;
