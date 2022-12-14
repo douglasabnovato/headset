@@ -11,6 +11,6 @@ Projeto frontend para ser pixel perfect.
 #### Tarefas
 
 - [x] desenhar os elementos
-- [ ] posicionar os elementos
+- [x] posicionar os elementos
 - [ ] fontes 
 - [ ] ajustar a estilização
