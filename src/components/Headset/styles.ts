@@ -33,6 +33,7 @@ export const Image = styled.div`
 export const Details = styled.div`  
     position: relative;
     display: block;
+    margin: 6vh 2vw;
     flex-direction: row;
     align-items: flex-start;
     padding: 0px; 
@@ -52,6 +53,7 @@ export const Shipping = styled.p`
     background: #191847;
     border-radius: 20px;
     color: #FFFFFF;
+    margin-block-end: 1vh;
 `;
 
 export const Title = styled.h2` 
@@ -80,6 +82,7 @@ export const PriceOff = styled.p`
     flex: none;
     order: 0;
     flex-grow: 0;
+    margin-block-start: 3vh;
 `;
 
 export const PriceOn = styled.p` 
@@ -109,6 +112,7 @@ export const Offer = styled.p`
     flex: none;
     order: 2;
     flex-grow: 0;
+    margin-block: 1vh;
 `;
 
 export const ButtonAdd = styled.button` 
@@ -116,8 +120,8 @@ export const ButtonAdd = styled.button`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 16px;
-    gap: 10px;
+    align-self: stretch;
+    padding: 16px;    
     width: 442px;
     height: 59px;
     background: #4788E9;
@@ -126,15 +130,14 @@ export const ButtonAdd = styled.button`
     border: 1px solid #4788E9;
     flex: none;
     order: 2;
-    align-self: stretch;
     flex-grow: 0;
     cursor: pointer;
     color: #FFFFFF;
+    margin-block: 3vh;
 `;
 
 export const Stock = styled.p` 
     display: flex;
-    width: 117px;
     height: 21px;
     font-family: 'Poppins';
     font-style: normal;
@@ -145,6 +148,7 @@ export const Stock = styled.p`
     flex: none;
     order: 1;
     flex-grow: 0;
+    margin-block: 1vh;
 `;
 
 export const Ball = styled.div` 
@@ -155,25 +159,27 @@ export const Ball = styled.div`
     flex: none;
     order: 0;
     flex-grow: 0;
+    margin-inline-end: .5vw;
 `;
 
 export const IconCart = styled.div`
     width: 29px;
-    height: 23px;
+    height: 30px;
     background-image: url(${imageCart});
-    margin: 6vh 2vw;
     flex: none;
     order: 0;
     flex-grow: 0;
+    margin-inline-end: 15px;
 `;
 
 export const IconWishlist = styled.div`
-    width: 29px;
+    width: 27px;
     height: 23px;
     background-image: url(${imageWishlist});
     flex: none;
     order: 0;
     flex-grow: 0;
+    margin-inline-end: 15px;
 `;
 
 export const Buttons = styled.button`  
@@ -181,6 +187,7 @@ export const Buttons = styled.button`
     border: none;
     background: none;    
     button {
+        display: flex;
         box-sizing: border-box;
         flex-direction: row;
         justify-content: center;
@@ -192,6 +199,6 @@ export const Buttons = styled.button`
         border-radius: 8px; 
         flex-grow: 1;
         cursor: pointer;
-        margin:6px
+        margin: 6px;
     }
 `;
