@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import image from "./assets/headphone.png"
+import imageHeadset from "./assets/headphone.png"
+import imageCart from "./assets/cart.png"
+import imageWishlist from "./assets/wish.png"
 
 export const Main = styled.div`
     position: relative;
-    display: flex;    
+    display: flex;
 `;
 
 export const Container = styled.div`
@@ -18,9 +20,11 @@ export const Container = styled.div`
 `;
 
 export const Image = styled.div`
+    position: relative;
     width: 249px;
     height: 223px;
-    background-image: url(${image});
+    margin: 6vh 2vw;
+    background-image: url(${imageHeadset});
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -63,7 +67,7 @@ export const Title = styled.h2`
     color: #191847;
 `;
 
-export const PriceOff = styled.p` 
+export const PriceOff = styled.p`
     width: 54px;
     height: 21px;
     font-family: 'Roboto';
@@ -119,11 +123,13 @@ export const ButtonAdd = styled.button`
     background: #4788E9;
     box-shadow: 0px 7px 0px #1C57EE;
     border-radius: 8px;
+    border: 1px solid #4788E9;
     flex: none;
     order: 2;
     align-self: stretch;
     flex-grow: 0;
     cursor: pointer;
+    color: #FFFFFF;
 `;
 
 export const Stock = styled.p` 
@@ -146,6 +152,25 @@ export const Ball = styled.div`
     height: 13px;
     border-radius: 50%;
     background: #00D98B;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+`;
+
+export const IconCart = styled.div`
+    width: 29px;
+    height: 23px;
+    background-image: url(${imageCart});
+    margin: 6vh 2vw;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+`;
+
+export const IconWishlist = styled.div`
+    width: 29px;
+    height: 23px;
+    background-image: url(${imageWishlist});
     flex: none;
     order: 0;
     flex-grow: 0;
