@@ -129,6 +129,9 @@ export const Offer = styled.p`
 export const ButtonAdd = styled.button` 
     display: flex;
     flex-direction: row;
+    
+    width: 442px;
+    height: 59px;
 
     justify-content: center;
     align-items: center;
@@ -136,14 +139,12 @@ export const ButtonAdd = styled.button`
 
     padding: 16px;   
     gap: 10px; 
-    width: 442px;
-    height: 59px;
 
     background: #4788E9;
     box-shadow: 0px 7px 0px #1C57EE;
     border-radius: 8px;
     border: 1px solid #4788E9;
-    
+
     flex: none;
     order: 2;
     flex-grow: 0;
@@ -155,7 +156,12 @@ export const ButtonAdd = styled.button`
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
-    line-height: 27px;
+    line-height: 27px; 
+
+    &:hover {
+        background: rgb(71, 136, 233);
+        background: linear-gradient(0deg, rgba(71, 136, 233) 0%, rgba(2,126,251,1) 100%);
+    }
 `;
 
 export const Stock = styled.p` 
