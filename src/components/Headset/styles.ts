@@ -127,40 +127,68 @@ export const Offer = styled.p`
 `;
 
 export const ButtonAdd = styled.button` 
+
+    margin-block-start: 20px;
+    margin-block-end: 25px;
+
+    background-color:#4788e9;
+    position:relative;
+
+    border: none;
+
     display: flex;
     flex-direction: row;
-    
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    gap: 10px;
+
     width: 442px;
     height: 59px;
 
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-
-    padding: 16px;   
-    gap: 10px; 
-
-    background: #4788E9;
-    box-shadow: 0px 7px 0px #1C57EE;
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+    box-shadow:inset 0 1px 0 #c5dbfc, 0 10px 0 #1C57EE ; 
     border-radius: 8px;
-    border: 1px solid #4788E9;
-
+    
     flex: none;
     order: 2;
+    align-self: stretch;
     flex-grow: 0;
-    cursor: pointer;
-    color: #FFFFFF;
-    margin-block: 3vh;
 
-    font-family: 'Poppins', sans-serif;
+    color:white;
+    font-family:'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
-    line-height: 27px; 
+    line-height: 27px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    &:active{
+        top:10px;
+        background-color:#0962e6; 
+        box-shadow:inset 0 1px 0 #c5dbfc, inset 0 -3px 0 #00378a; 
+    }
+
+    &:after{
+        content:"";
+        height:100%;
+        width:100%;
+        padding:4px;
+        position: absolute;
+        bottom:-15px;
+        left:-4px;
+        z-index:-1;
+        background-color:#000c1f;
+        border-radius: 5px;
+    }
 
     &:hover {
         background: rgb(71, 136, 233);
         background: linear-gradient(0deg, rgba(71, 136, 233) 0%, rgba(2,126,251,1) 100%);
+        cursor: pointer;
     }
 `;
 
