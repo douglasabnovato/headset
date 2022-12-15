@@ -33,7 +33,7 @@ export const Image = styled.div`
 export const Details = styled.div`  
     position: relative;
     display: block;
-    margin: 6vh 2vw;
+    margin: 6vh 0vw;
     flex-direction: row;
     align-items: flex-start;
     padding: 0px; 
@@ -44,9 +44,9 @@ export const Shipping = styled.p`
     position: relative;
     flex-direction: row;
     align-items: flex-start;
-    padding: 4px 8px;
+    padding: 4px 10px;
     gap: 10px;
-    width: 112px;
+    width: 119px;
     height: 29px;
     left: 0px;
     top: 0px;
@@ -55,7 +55,7 @@ export const Shipping = styled.p`
     margin-block-end: 1vh;
 
     color: #FFFFFF;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 14px;
@@ -67,7 +67,7 @@ export const Title = styled.h2`
     height: 72px;
     left: 0px;
     top: 39px;
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
     font-size: 24px;
@@ -84,7 +84,7 @@ export const PriceOff = styled.p`
     order: 0;
     flex-grow: 0;
     
-    font-family: 'Roboto';
+    font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -102,7 +102,7 @@ export const PriceOn = styled.p`
     order: 1;
     flex-grow: 0;
     
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
@@ -119,7 +119,7 @@ export const Offer = styled.p`
     order: 2;
     flex-grow: 0;
 
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -147,7 +147,7 @@ export const ButtonAdd = styled.button`
     color: #FFFFFF;
     margin-block: 3vh;
 
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
@@ -162,10 +162,10 @@ export const Stock = styled.p`
     flex: none;
     order: 1;
     flex-grow: 0;
-    margin-block: 1vh;
+    margin-block-end: 3vh;
     color: #000000;
     
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
     font-size: 14px;
@@ -222,7 +222,7 @@ export const Buttons = styled.button`
         cursor: pointer;
         margin: 6px;
 
-        font-family: 'Poppins';
+        font-family: 'Poppins', sans-serif;
         font-style: normal;
         font-weight: 500;
         font-size: 18px;
