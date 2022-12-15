@@ -12,12 +12,10 @@ Projeto frontend para ser pixel perfect.
 
 - [x] desenhar os elementos
 - [x] posicionar os elementos
-- [ ] font texto free
-- [ ] font texto razer
-- [ ] font priceoff
-- [ ] font priceon
-- [ ] font offer
-- [ ] font botão azul
-- [ ] font stock
-- [ ] font dois botões
+- [x] font texto free, texto razer, priceoff, priceon, offer, botão azul, stock, dois botões
+- [ ] efeito de click nos botões
+- [ ] ButtonGroup e ButtonSecondary
+- [ ] um botão que aceite prop com icone e label: children
+- [ ] efeito do botão como botão físico de jogo
+- [ ] url da imagem por props
 
