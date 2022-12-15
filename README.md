@@ -11,6 +11,13 @@ Projeto frontend para ser pixel perfect.
 #### Tarefas
 
 - [x] desenhar os elementos
-- [ ] posicionar os elementos
-- [ ] fontes 
-- [ ] ajustar a estilização
+- [x] posicionar os elementos
+- [ ] font texto free
+- [ ] font texto razer
+- [ ] font priceoff
+- [ ] font priceon
+- [ ] font offer
+- [ ] font botão azul
+- [ ] font stock
+- [ ] font dois botões
+
