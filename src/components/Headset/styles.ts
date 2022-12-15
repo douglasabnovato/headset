@@ -129,17 +129,21 @@ export const Offer = styled.p`
 export const ButtonAdd = styled.button` 
     display: flex;
     flex-direction: row;
+
     justify-content: center;
     align-items: center;
     align-self: stretch;
+
     padding: 16px;   
     gap: 10px; 
     width: 442px;
     height: 59px;
+
     background: #4788E9;
     box-shadow: 0px 7px 0px #1C57EE;
     border-radius: 8px;
     border: 1px solid #4788E9;
+    
     flex: none;
     order: 2;
     flex-grow: 0;
