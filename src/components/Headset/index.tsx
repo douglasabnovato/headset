@@ -4,10 +4,11 @@ import {
     Container,
     Image,
     Details,
-    Buttons,
+    ButtonGroup,
+    ButtonSecondary,
     Stock,
     Ball,
-    ButtonAdd,
+    ButtonPrimary,
     Offer,
     PriceOn,
     PriceOff,
@@ -29,14 +30,14 @@ function Headset() {
                     <PriceOff>1.599,00</PriceOff>
                     <PriceOn>799,00</PriceOn>
                     <Offer>The offer is valid until April 3 or as long as stock lasts!</Offer>
-                    <ButtonAdd>Add to cart</ButtonAdd>
+                    <ButtonPrimary>Add to cart</ButtonPrimary>
                     <Stock><Ball />50+ pcs. in stock.</Stock>
-                    <Buttons>
-                        <button>
-                            <IconCart />Add to cart</button>
-                        <button>
-                            <IconWishlist />Add to wishlist</button>
-                    </Buttons>
+                    <ButtonGroup>
+                        <ButtonSecondary>
+                            <IconCart />Add to cart</ButtonSecondary>
+                        <ButtonSecondary>
+                            <IconWishlist />Add to wishlist</ButtonSecondary>
+                    </ButtonGroup>
                 </Details>
             </Container>
         </Main>

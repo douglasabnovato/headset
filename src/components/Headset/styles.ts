@@ -126,7 +126,7 @@ export const Offer = styled.p`
     line-height: 21px;
 `;
 
-export const ButtonAdd = styled.button` 
+export const ButtonPrimary = styled.button` 
 
     margin-block-start: 20px;
     margin-block-end: 25px;
@@ -241,11 +241,13 @@ export const IconWishlist = styled.div`
     margin-inline-end: 15px;
 `;
 
-export const Buttons = styled.button`  
+export const ButtonGroup = styled.div`  
     display: flex;
     border: none;
-    background: none;    
-    button {
+    background: none; 
+`;
+
+export const ButtonSecondary = styled.button`
         display: flex;
         box-sizing: border-box;
         flex-direction: row;
@@ -269,5 +271,4 @@ export const Buttons = styled.button`
         flex: none;
         order: 1;
         flex-grow: 0;
-    }
-`;
+`
