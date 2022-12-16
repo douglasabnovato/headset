@@ -17,4 +17,5 @@ Projeto frontend para ser pixel perfect.
 - [x] separar em ButtonGroup e ButtonSecondary
 - [ ] ButtonSecondary: um botão que aceite prop com icone e label: children
 - [ ] url da imagem por props
+- [ ] aperfeiçoar o styled-components
 
