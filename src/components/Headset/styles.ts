@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import imageHeadset from "./assets/headphone.png"
-import imageCart from "./assets/cart.png"
-import imageWishlist from "./assets/wish.png"
+
+import imageHeadset from "./assets/imageHeadphone.png"
+import imageCart from "./assets/imageCart.png"
+import imageWish from "./assets/imageWish.png"
 
 export const Main = styled.div`
     position: relative;
@@ -231,10 +232,10 @@ export const IconCart = styled.div`
     margin-inline-end: 15px;
 `;
 
-export const IconWishlist = styled.div`
+export const IconWish = styled.div`
     width: 27px;
     height: 23px;
-    background-image: url(${imageWishlist});
+    background-image: url(${imageWish});
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -247,28 +248,28 @@ export const ButtonGroup = styled.div`
     background: none; 
 `;
 
-export const ButtonSecondary = styled.button`
-        display: flex;
-        box-sizing: border-box;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        padding: 16px;
-        width: 213px;
-        height: 64px;
-        border: 2px solid #C9C9DA;
-        border-radius: 8px; 
-        flex-grow: 1;
-        cursor: pointer;
-        margin: 6px;
+export const ButtonStyled = styled.button`
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    width: 213px;
+    height: 64px;
+    border: 2px solid #C9C9DA;
+    border-radius: 8px; 
+    flex-grow: 1;
+    cursor: pointer;
+    margin: 6px;
 
-        font-family: 'Poppins', sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 18px;
-        line-height: 27px;
-        color: #191847;
-        flex: none;
-        order: 1;
-        flex-grow: 0;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 27px;
+    color: #191847;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
 `

@@ -5,7 +5,7 @@ import {
     Image,
     Details,
     ButtonGroup,
-    ButtonSecondary,
+    ButtonStyled,
     Stock,
     Ball,
     ButtonPrimary,
@@ -15,15 +15,22 @@ import {
     Title,
     Shipping,
     IconCart,
-    IconWishlist
+    IconWish
 } from './styles';
+
+function ButtonSecondary(props: { text: string, icon: any }){
+    return (
+        <ButtonStyled>
+            <span>{props.icon}</span><span>{props.text}</span>
+        </ButtonStyled>
+    )
+}
 
 function Headset() {
     return (
         <Main>
             <Container>
-                <Image>
-                </Image>
+                <Image />
                 <Details>
                     <Shipping>Free shipping</Shipping>
                     <Title>Razer Kraken Kitty Edt Gaming Headset Quartz</Title>
@@ -33,10 +40,14 @@ function Headset() {
                     <ButtonPrimary>Add to cart</ButtonPrimary>
                     <Stock><Ball />50+ pcs. in stock.</Stock>
                     <ButtonGroup>
-                        <ButtonSecondary>
-                            <IconCart />Add to cart</ButtonSecondary>
-                        <ButtonSecondary>
-                            <IconWishlist />Add to wishlist</ButtonSecondary>
+                        <ButtonSecondary 
+                            text="Add to cart"
+                            icon={<IconCart />}
+                         />
+                        <ButtonSecondary 
+                            text="Add to wishlist"
+                            icon={<IconWish />} 
+                        />                     
                     </ButtonGroup>
                 </Details>
             </Container>

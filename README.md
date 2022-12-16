@@ -15,7 +15,7 @@ Projeto frontend para ser pixel perfect.
 - [x] font texto free, texto razer, priceoff, priceon, offer, botão azul, stock, dois botões
 - [x] ButtonPrimary: efeito do botão como botão físico de jogo
 - [x] separar em ButtonGroup e ButtonSecondary
-- [ ] ButtonSecondary: um botão que aceite prop com icone e label: children
-- [ ] url da imagem por props
-- [ ] aperfeiçoar o styled-components
+- [x] ButtonSecondary: um botão que aceite prop com icone e label: children
+- [x] Image: que aceite prop com a url da imagem 
+- [ ] aperfeiçoar o styled-components com props dos styles
 
