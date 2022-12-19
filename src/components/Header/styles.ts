@@ -22,7 +22,6 @@ export const TitlePage = styled.p`
     top: 0px;
     border-radius: 20px;
     margin-block-end: 1vh;
-
     color: #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-style: normal;

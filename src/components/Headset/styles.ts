@@ -54,7 +54,6 @@ export const Shipping = styled.p`
     background: #191847;
     border-radius: 20px;
     margin-block-end: 1vh;
-
     color: #FFFFFF;
     font-family: 'Poppins', sans-serif;
     font-style: normal;
@@ -83,26 +82,22 @@ export const PriceOff = styled.p`
     color: #191847;
     flex: none;
     order: 0;
-    flex-grow: 0;
-    
+    flex-grow: 0;    
     font-family: 'Roboto', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
-
     margin-block-start: 3vh;
 `;
 
 export const PriceOn = styled.p` 
     width: 120px;
     height: 72px;
-
     color: #191847;
     flex: none;
     order: 1;
-    flex-grow: 0;
-    
+    flex-grow: 0;    
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 700;
@@ -112,14 +107,12 @@ export const PriceOn = styled.p`
 
 export const Offer = styled.p` 
     width: 369px;
-    height: 21px;
-    
+    height: 21px;    
     color: #191847;
     opacity: 0.6;
     flex: none;
     order: 2;
     flex-grow: 0;
-
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
@@ -128,35 +121,27 @@ export const Offer = styled.p`
 `;
 
 export const ButtonPrimary = styled.button` 
-
     margin-block-start: 20px;
     margin-block-end: 25px;
-
-    background-color:#4788e9;
+    background-color: ${props => props.theme.colors.primary}; /* #4788e9;*/
     position:relative;
-
     border: none;
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding: 16px;
     gap: 10px;
-
     width: 442px;
     height: 59px;
-
     text-shadow: 0px 1px 0px #000;
     filter: dropshadow(color=#000, offx=0px, offy=1px);
     box-shadow:inset 0 1px 0 #c5dbfc, 0 10px 0 #1C57EE ; 
-    border-radius: 8px;
-    
+    border-radius: 8px;    
     flex: none;
     order: 2;
     align-self: stretch;
     flex-grow: 0;
-
     color:white;
     font-family:'Poppins', sans-serif;
     font-style: normal;
@@ -164,15 +149,12 @@ export const ButtonPrimary = styled.button`
     font-size: 18px;
     line-height: 27px;
     text-align: center;
-
     color: #FFFFFF;
-
     &:active{
         top:10px;
         background-color:#0962e6; 
         box-shadow:inset 0 1px 0 #c5dbfc, inset 0 -3px 0 #00378a; 
     }
-
     &:after{
         content:"";
         height:100%;
@@ -185,7 +167,6 @@ export const ButtonPrimary = styled.button`
         background-color:#000c1f;
         border-radius: 5px;
     }
-
     &:hover {
         background: rgb(71, 136, 233);
         background: linear-gradient(0deg, rgba(71, 136, 233) 0%, rgba(2,126,251,1) 100%);
@@ -202,8 +183,7 @@ export const Stock = styled.p`
     order: 1;
     flex-grow: 0;
     margin-block-end: 3vh;
-    color: #000000;
-    
+    color: #000000;    
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
@@ -262,7 +242,6 @@ export const ButtonStyled = styled.button`
     flex-grow: 1;
     cursor: pointer;
     margin: 6px;
-
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 500;
