@@ -3,7 +3,10 @@ import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
 import { shade } from 'polished';
 
-import { Container } from './styles';
+import { 
+    Container, 
+    TitlePage 
+} from './styles';
 
 interface Props {
     toggleTheme(): void;
@@ -14,7 +17,7 @@ const Header: React.FC<Props> = ({ toggleTheme }) => {
 
     return (
         <Container>
-            Headseat
+            <TitlePage>Headseat</TitlePage>
             <Switch
                 onChange={toggleTheme}
                 checked={title === 'dark'}
