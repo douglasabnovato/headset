@@ -23,6 +23,6 @@ export default {
       300: '#ffffff',
     },
     background: '#f5f5f5',
-    text: '#333',
+    text: '#333333',
   }
 };

@@ -123,7 +123,7 @@ export const Offer = styled.p`
 export const ButtonPrimary = styled.button` 
     margin-block-start: 20px;
     margin-block-end: 25px;
-    background-color: ${props => props.theme.colors.primary}; /* #4788e9;*/
+    background-color: ${props => props.theme.colors.secundary[600]}; 
     position:relative;
     border: none;
     display: flex;
@@ -136,7 +136,7 @@ export const ButtonPrimary = styled.button`
     height: 59px;
     text-shadow: 0px 1px 0px #000;
     filter: dropshadow(color=#000, offx=0px, offy=1px);
-    box-shadow:inset 0 1px 0 #c5dbfc, 0 10px 0 #1C57EE ; 
+    box-shadow:inset 0 1px 0 ${props => props.theme.colors.secundary[300]}, 0 10px 0 ${props => props.theme.colors.secundary[700]};
     border-radius: 8px;    
     flex: none;
     order: 2;
@@ -152,8 +152,8 @@ export const ButtonPrimary = styled.button`
     color: #FFFFFF;
     &:active{
         top:10px;
-        background-color:#0962e6; 
-        box-shadow:inset 0 1px 0 #c5dbfc, inset 0 -3px 0 #00378a; 
+        background-color: ${props => props.theme.colors.secundary[1000]}; 
+        box-shadow:inset 0 1px 0 ${props => props.theme.colors.secundary[300]}, inset 0 -3px 0 ${props => props.theme.colors.secundary[800]};
     }
     &:after{
         content:"";
@@ -164,12 +164,12 @@ export const ButtonPrimary = styled.button`
         bottom:-15px;
         left:-4px;
         z-index:-1;
-        background-color:#000c1f;
+        background-color: ${props => props.theme.colors.secundary[900]};
         border-radius: 5px;
     }
     &:hover {
-        background: rgb(71, 136, 233);
-        background: linear-gradient(0deg, rgba(71, 136, 233) 0%, rgba(2,126,251,1) 100%);
+        background: #4788e9;
+        background: linear-gradient(0deg, ${props => props.theme.colors.secundary[400]} 0%, ${props => props.theme.colors.secundary[500]} 100%); 
         cursor: pointer;
     }
 `;
