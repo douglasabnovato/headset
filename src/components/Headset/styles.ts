@@ -134,8 +134,8 @@ export const ButtonPrimary = styled.button`
     gap: 10px;
     width: 442px;
     height: 59px;
-    text-shadow: 0px 1px 0px #000;
-    filter: dropshadow(color=#000, offx=0px, offy=1px);
+    text-shadow: 0px 1px 0px #000000;
+    filter: dropshadow(color=#000000, offx=0px, offy=1px);
     box-shadow:inset 0 1px 0 ${props => props.theme.colors.secundary[300]}, 0 10px 0 ${props => props.theme.colors.secundary[700]};
     border-radius: 8px;    
     flex: none;
@@ -168,7 +168,7 @@ export const ButtonPrimary = styled.button`
         border-radius: 5px;
     }
     &:hover {
-        background: #4788e9;
+        background: ${props => props.theme.colors.secundary[600]};
         background: linear-gradient(0deg, ${props => props.theme.colors.secundary[400]} 0%, ${props => props.theme.colors.secundary[500]} 100%); 
         cursor: pointer;
     }
