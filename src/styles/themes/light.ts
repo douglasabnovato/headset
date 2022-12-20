@@ -1,7 +1,7 @@
 export default {
   title: 'light',
   colors: {
-    primary: '#C62E65',
+    primary: '#D63AF9',
     secundary: {
       1000: '#D63AF9',
       900: '#1d0124',
@@ -13,16 +13,16 @@ export default {
       300: '#eec3f7',
     },
     neutral: {
-      1000: '#4788e9',
-      900: '#ffffff',
-      800: '#ffffff',
-      700: '#ffffff',
+      1000: '#d8ccdb',
+      900: '#D63AF9',
+      800: '#333333',
+      700: '#222222',
       600: '#ffffff',
       500: '#ffffff',
       400: '#ffffff',
       300: '#ffffff',
     },
     background: '#f5f5f5',
-    text: '#333333',
+    text: '#ffffff',
   }
 };

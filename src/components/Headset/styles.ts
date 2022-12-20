@@ -15,7 +15,7 @@ export const Container = styled.div`
     margin: 3vh auto;
     width: 887px;
     height: 661px;
-    background: #FFFFFF;
+    background: ${props => props.theme.colors.text};
     box-shadow: 0px 24px 28px 9px rgba(179, 193, 217, 0.33);
     border-radius: 15px;
 `;
@@ -38,7 +38,7 @@ export const Details = styled.div`
     flex-direction: row;
     align-items: flex-start;
     padding: 0px; 
-    color: #000000
+    color: ${props => props.theme.colors.text};
 `;
 
 export const Shipping = styled.p` 
@@ -51,10 +51,10 @@ export const Shipping = styled.p`
     height: 29px;
     left: 0px;
     top: 0px;
-    background: #191847;
+    background: ${props => props.theme.colors.secundary[900]};
     border-radius: 20px;
     margin-block-end: 1vh;
-    color: #FFFFFF;
+    color: ${props => props.theme.colors.text};
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
@@ -149,7 +149,7 @@ export const ButtonPrimary = styled.button`
     font-size: 18px;
     line-height: 27px;
     text-align: center;
-    color: #FFFFFF;
+    color: ${props => props.theme.colors.text};
     &:active{
         top:10px;
         background-color: ${props => props.theme.colors.secundary[1000]}; 
@@ -237,7 +237,7 @@ export const ButtonStyled = styled.button`
     padding: 16px;
     width: 213px;
     height: 64px;
-    border: 2px solid #C9C9DA;
+    border: 2px solid ${props => props.theme.colors.secundary[600]};
     border-radius: 8px; 
     flex-grow: 1;
     cursor: pointer;
@@ -247,7 +247,7 @@ export const ButtonStyled = styled.button`
     font-weight: 500;
     font-size: 18px;
     line-height: 27px;
-    color: #191847;
+    color: ${props => props.theme.colors.secundary[900]};
     flex: none;
     order: 1;
     flex-grow: 0;

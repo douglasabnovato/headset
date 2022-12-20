@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   height: 60px;
   background: ${props => props.theme.colors.primary};
-  color: #FFF;
+  color: ${props => props.theme.colors.text};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -22,7 +22,7 @@ export const TitlePage = styled.p`
     top: 0px;
     border-radius: 20px;
     margin-block-end: 1vh;
-    color: #FFFFFF;
+    color: ${props => props.theme.colors.text};
     font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 600;
