@@ -6,7 +6,9 @@
   <img alt="headset" title="#headset" src="./.github/light.jpg">
 </p>   
 
-Projeto frontend para ser pixel perfect. 
+### Layout
+
+Projeto frontend para ser pixel perfect com design do [Figma](https://www.figma.com/file/19O5HFND66vzRlnpBUhWxB/day_1575?node-id=1%3A2&t=sxI085QLRtlRNj0T-0). 
 
 #### Tecnologias
 
