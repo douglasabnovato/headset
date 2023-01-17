@@ -36,3 +36,14 @@ Projeto frontend para ser pixel perfect com design do [Figma](https://www.figma.
   <img alt="headset" title="#headset" src="./.github/dark.jpg" width="400px"> 
 </p>
 
+### Inspirações
+
+- Desenhar um modelo de loja virtual de aplicações
+- [Código de Loja Virtual](https://github.com/LeonardoCamargo31/loja-virtual) 
+- [Design de Loja Virtual](https://morioh.com/p/09ec4bc619bf)  
+- [Layout E-commerce em ReactJS](https://reactjsexample.com/create-an-e-commerce-site-with-react-js/amp/)  
+- [Layout de Loja Virtual](https://www.luiztools.com.br/obrigado/)  
+- [E-commerce](https://joaogsdc.medium.com/react-criando-ecommerce-marketplace-1-parte-d318bcd0f4c8)   
+- [E-commerce](https://github.com/martins-rafael/launchstore#instala%C3%A7%C3%A3o-e-uso)   
+- [Loja Online](https://www.alura.com.br/curso-online-loja-online-shopify)   
+- [E-commerce](https://hotmart.com/pt-br/marketplace/produtos/criando-um-ecommerce-do-zero-com-nodejs-react-e-mongodb/W10551234Y)  
