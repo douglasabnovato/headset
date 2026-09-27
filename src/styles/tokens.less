@@ -1,0 +1,38 @@
+/*
+ * tokens.less · Variáveis e mixins LESS da marca Headset Store.
+ * O magenta vem do tema claro original do projeto; o azul-lilás, do escuro.
+ */
+@marca: #b31fd6;
+@marca-rgb: 179, 31, 214;
+@marca-escura: #8a14a6;
+@marca-escura-rgb: 138, 20, 166;
+@marca-dark: #9a3fd6;
+@marca-dark-rgb: 154, 63, 214;
+@marca-dark-link: #d9a6f5;
+@marca-dark-link-rgb: 217, 166, 245;
+@verde: #2fbf71;
+@verde-escuro: #1e7d4a;
+@foco: #ffb020;
+@vermelho: #b02a37;
+@vermelho-claro: #ff8a95;
+@fundo-claro: #f5f5f7;
+@fundo-escuro: #121117;
+@fonte: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+@raio: 10px;
+@raio-lg: 16px;
+
+// Aplica cor de fundo/borda e estados de hover ao botão do Bootstrap.
+.botao-cor(@fundo, @hover) {
+  --bs-btn-bg: @fundo;
+  --bs-btn-border-color: @fundo;
+  --bs-btn-hover-bg: @hover;
+  --bs-btn-hover-border-color: @hover;
+  --bs-btn-active-bg: darken(@hover, 5%);
+  --bs-btn-active-border-color: darken(@hover, 5%);
+  --bs-btn-disabled-bg: @fundo;
+  --bs-btn-disabled-border-color: @fundo;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-color: #fff;
+  --bs-btn-active-color: #fff;
+}
+/* fim de tokens.less */

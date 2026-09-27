@@ -1,0 +1,309 @@
+/*
+ * main.less · Personalização do Bootstrap 5.3 com LESS: tokens da marca,
+ * temas claro/escuro (data-bs-theme), tipografia Poppins, botão "físico"
+ * de jogo herdado do layout original e componentes da loja.
+ */
+@import "./tokens.less";
+
+:root,
+[data-bs-theme="light"] {
+  --bs-primary: @marca;
+  --bs-primary-rgb: @marca-rgb;
+  --bs-link-color: @marca-escura;
+  --bs-link-color-rgb: @marca-escura-rgb;
+  --bs-link-hover-color: darken(@marca-escura, 10%);
+  --bs-body-bg: @fundo-claro;
+  --bs-body-font-family: @fonte;
+  --bs-border-radius: @raio;
+  --bs-border-radius-lg: @raio-lg;
+  --bs-focus-ring-color: fade(@marca, 35%);
+  --hs-card: #fff;
+  --hs-sombra: 0 18px 30px -12px rgba(92, 20, 110, 0.18);
+  --hs-destaque: linear-gradient(135deg, #fff 0%, #f7e8fc 100%);
+}
+
+[data-bs-theme="dark"] {
+  --bs-primary: @marca-dark;
+  --bs-primary-rgb: @marca-dark-rgb;
+  --bs-link-color: @marca-dark-link;
+  --bs-link-color-rgb: @marca-dark-link-rgb;
+  --bs-link-hover-color: lighten(@marca-dark-link, 10%);
+  --bs-body-bg: @fundo-escuro;
+  --hs-card: #1d1b24;
+  --hs-sombra: 0 18px 30px -12px rgba(0, 0, 0, 0.6);
+  --hs-destaque: linear-gradient(135deg, #1d1b24 0%, #2a1f33 100%);
+}
+
+body {
+  font-family: @fonte;
+  -webkit-font-smoothing: antialiased;
+}
+
+.card {
+  --bs-card-bg: var(--hs-card);
+  --bs-card-border-color: var(--bs-border-color-translucent);
+  box-shadow: var(--hs-sombra);
+}
+
+.btn-primary {
+  .botao-cor(@marca, @marca-escura);
+  [data-bs-theme="dark"] & {
+    .botao-cor(@marca-dark, darken(@marca-dark, 8%));
+  }
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--bs-link-color);
+  --bs-btn-border-color: var(--bs-link-color);
+  --bs-btn-hover-bg: var(--bs-primary);
+  --bs-btn-hover-border-color: var(--bs-primary);
+  --bs-btn-active-bg: var(--bs-primary);
+  --bs-btn-hover-color: #fff;
+}
+.pagination {
+  --bs-pagination-active-bg: var(--bs-primary);
+  --bs-pagination-active-border-color: var(--bs-primary);
+  --bs-pagination-color: var(--bs-link-color);
+}
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: @marca;
+  box-shadow: 0 0 0 0.25rem var(--bs-focus-ring-color);
+}
+.form-check-input:checked {
+  background-color: @marca;
+  border-color: @marca;
+}
+:focus-visible {
+  outline: 3px solid @foco;
+  outline-offset: 2px;
+}
+
+// Botão "físico" de jogo (do design original): afunda ao clicar.
+.btn-game {
+  --profundidade: 6px;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  background: var(--bs-primary);
+  border: 0;
+  border-radius: @raio-lg;
+  padding: 0.85rem 1.6rem;
+  box-shadow: 0 var(--profundidade) 0 darken(@marca, 18%), 0 12px 20px -6px fade(@marca, 50%);
+  transform: translateY(0);
+  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.2s;
+  &:hover { color: #fff; filter: brightness(1.06); }
+  &:active:not(:disabled) {
+    transform: translateY(var(--profundidade));
+    box-shadow: 0 0 0 darken(@marca, 18%), 0 4px 8px -4px fade(@marca, 50%);
+  }
+  &:disabled { color: #fff; filter: grayscale(0.6); opacity: 0.65; box-shadow: none; }
+  [data-bs-theme="dark"] & { box-shadow: 0 var(--profundidade) 0 darken(@marca-dark, 22%); }
+}
+
+// Layout
+.pular {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 2000;
+  background: @marca-escura;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: @raio;
+  &:focus { left: 8px; }
+}
+.topo {
+  background: fade(#fff, 92%);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+  [data-bs-theme="dark"] & { background: fade(@fundo-escuro, 92%); }
+}
+.marca {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  &__store { color: var(--bs-link-color); font-weight: 500; margin-left: 2px; }
+}
+.busca { max-width: 440px; }
+.navbar-nav .nav-link,
+.tema-btn { white-space: nowrap; }
+#conteudo:focus { outline: none; }
+.rodape { border-top: 1px solid var(--bs-border-color-translucent); }
+
+// Destaque (card original do projeto Headset)
+.destaque {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 2rem;
+  align-items: center;
+  background: var(--hs-destaque);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  box-shadow: 0 24px 28px 9px fade(#b3c1d9, 33%);
+  [data-bs-theme="dark"] & { box-shadow: var(--hs-sombra); }
+  &__imagem img { width: 100%; height: auto; max-width: 320px; margin-inline: auto; display: block; filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.18)); }
+  &__titulo { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin: 0.75rem 0; small { font-weight: 500; color: var(--bs-secondary-color); } }
+  &__oferta { color: var(--bs-secondary-color); }
+  &__acoes { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
+  @media (max-width: 767px) { grid-template-columns: 1fr; text-align: center; &__acoes { justify-content: center; } }
+}
+.selo-frete {
+  display: inline-block;
+  background: @verde-escuro;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+}
+.badge-frete { background: @verde-escuro; color: #fff; }
+.preco-de { color: var(--bs-secondary-color); text-decoration: line-through; margin: 0; }
+.preco-por { font-size: 2.2rem; font-weight: 700; margin: 0 0 0.25rem; }
+.estoque {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  &__bola { width: 10px; height: 10px; border-radius: 50%; background: @verde; box-shadow: 0 0 0 4px fade(@verde, 25%); }
+  &__bola--zero { background: #9aa0a6; box-shadow: none; }
+  .destaque & { justify-content: flex-start; @media (max-width: 767px) { justify-content: center; } }
+}
+
+// Catálogo
+.filtros .form-select { min-width: 150px; }
+.produto-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  &:hover { transform: translateY(-3px); }
+  &__imagem img { width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: #f2f3f6; }
+  [data-bs-theme="dark"] &__imagem img { background: #2a2833; }
+  &__meta { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--bs-secondary-color); margin-bottom: 0.25rem; }
+  &__nome { font-weight: 600; a { color: inherit; text-decoration: none; &:hover { color: var(--bs-link-color); text-decoration: underline; } } }
+  &__cor { display: block; font-weight: 400; font-size: 0.85rem; color: var(--bs-secondary-color); }
+  &__preco { font-size: 1.15rem; white-space: nowrap; }
+  s { white-space: nowrap; }
+  @media (max-width: 575px) { s { display: block; } }
+  &__desejo {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+    background: fade(#fff, 90%);
+    color: @marca-escura;
+    font-size: 1.2rem;
+    line-height: 1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+    &.ativo { background: @marca; color: #fff; }
+  }
+}
+
+// Produto
+.produto__imagem {
+  background: var(--hs-destaque);
+  border-radius: 24px;
+  padding: 2rem;
+  img { width: 100%; height: auto; max-width: 420px; margin-inline: auto; display: block; }
+}
+
+// Carrinho e checkout
+.lista-carrinho__item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--bs-border-color-translucent);
+  &:last-child { border-bottom: 0; }
+  img { border-radius: @raio; object-fit: contain; background: #f2f3f6; flex: none; }
+  &.com-problema { background: fade(#dc3545, 6%); }
+}
+.quantidade { width: 128px; input { -moz-appearance: textfield; &::-webkit-inner-spin-button { -webkit-appearance: none; } } }
+.resumo {
+  div { display: flex; justify-content: space-between; margin-bottom: 0.4rem; }
+  dt { font-weight: 400; }
+  dd { margin: 0; }
+  &__total { font-size: 1.2rem; font-weight: 700; border-top: 1px solid var(--bs-border-color-translucent); padding-top: 0.6rem; }
+}
+.resumo-card.sticky-lg-top { top: 90px; }
+fieldset.card legend { float: none; width: auto; }
+.campo__giro { position: absolute; right: 0.75rem; top: 50%; margin-top: -0.5rem; }
+.sucesso-pedido {
+  max-width: 640px;
+  margin: 2rem auto;
+  &__marca { display: inline-grid; place-items: center; width: 72px; height: 72px; border-radius: 50%; background: @verde-escuro; color: #fff; font-size: 2rem; margin-bottom: 1rem; }
+}
+
+// Pedidos
+.pedido-card__mini { border-radius: 50%; border: 2px solid var(--hs-card); background: #f2f3f6; margin-left: -10px; &:first-child { margin-left: 0; } }
+
+// Autenticação e admin
+.auth { max-width: 460px; }
+.previa { width: 120px; height: 120px; border-radius: @raio; background: #f2f3f6; display: grid; place-items: center; overflow: hidden; img { object-fit: contain; } }
+.dialogo {
+  border: 0;
+  border-radius: @raio-lg;
+  padding: 1.5rem;
+  max-width: min(460px, 92vw);
+  background: var(--hs-card);
+  color: var(--bs-body-color);
+  box-shadow: var(--hs-sombra);
+  &::backdrop { background: rgba(0, 0, 0, 0.45); }
+}
+.barra { height: 10px; background: var(--bs-secondary-bg); border-radius: 999px; overflow: hidden; span { display: block; height: 100%; background: var(--bs-primary); border-radius: 999px; } }
+
+// Estados
+.carregando { display: flex; gap: 0.5rem; align-items: center; justify-content: center; padding: 3rem 0; color: var(--bs-secondary-color); }
+.vazio { text-align: center; padding: 3rem 1rem; &__icone { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; } }
+.avisos {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 3000;
+  display: grid;
+  gap: 0.5rem;
+  max-width: min(380px, calc(100vw - 2rem));
+}
+.aviso {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: @raio;
+  color: #fff;
+  background: @verde-escuro;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  animation: entrar 0.2s ease-out;
+  span { font-weight: 700; }
+  &--erro { background: #b02a37; }
+  &--info { background: #3d4452; }
+}
+@keyframes entrar { from { transform: translateY(8px); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+/* fim de main.less */
+
+// Ajustes de contraste AA (axe-core) para cinza e vermelho do Bootstrap.
+.btn-outline-secondary {
+  --bs-btn-color: #495057;
+  --bs-btn-border-color: #6c757d;
+  [data-bs-theme="dark"] & { --bs-btn-color: #ced4da; --bs-btn-border-color: #adb5bd; --bs-btn-hover-color: #121117; --bs-btn-hover-bg: #ced4da; }
+}
+.btn-outline-danger {
+  --bs-btn-color: @vermelho;
+  --bs-btn-border-color: @vermelho;
+  [data-bs-theme="dark"] & { --bs-btn-color: @vermelho-claro; --bs-btn-border-color: @vermelho-claro; }
+}
+.text-danger {
+  color: @vermelho !important;
+  [data-bs-theme="dark"] & { color: @vermelho-claro !important; }
+}
+[data-bs-theme="dark"] .invalid-feedback { color: @vermelho-claro; }
+[data-bs-theme="dark"] .previa,
+[data-bs-theme="dark"] .lista-carrinho__item img,
+[data-bs-theme="dark"] .pedido-card__mini { background: #2a2833; }
+/* fim dos ajustes de contraste */
