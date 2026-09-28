@@ -52,6 +52,17 @@ Cartão de teste: `4111 1111 1111 1111`, validade futura (ex.: `12/30`), CVV `12
 
 Variáveis opcionais em `server/.env` (veja `.env.example`). Em produção, `JWT_SECRET` é obrigatório.
 
+## Em produção
+
+**Demonstração:** https://headset-store.onrender.com
+
+- Um único serviço gratuito no Render entrega a API e o front na mesma origem (o cookie de sessão continua `httpOnly` + `SameSite=Lax`, sem CORS).
+- Configuração em `render.yaml`: build com `npm ci --include=dev && npm run build`, início com `npm run start:prod`, health check em `/api/health`.
+- `DEMO=1` desliga o upload de imagens no admin (as contas de demonstração são públicas).
+- Limitações do plano gratuito: o serviço dorme após 15 minutos sem acesso e leva cerca de 1 minuto para acordar; o disco é temporário, então o banco volta aos dados de exemplo a cada reinício.
+- CI no GitHub Actions: tipos, testes e build a cada push na `main`.
+- Passo a passo completo: [docs/DEPLOY.md](docs/DEPLOY.md).
+
 ## Exercícios do teste
 
 | Nº | Tema | Onde |

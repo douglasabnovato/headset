@@ -1,5 +1,5 @@
 /*
- * Footer · Rodapé com políticas resumidas e créditos.
+ * Footer · Rodapé com políticas resumidas, aviso de demonstração e créditos.
  */
 import { Link } from "react-router-dom";
 
@@ -11,6 +11,7 @@ export default function Footer() {
         <div>
           <p className="fw-bold mb-1">Headset Store</p>
           <p className="small mb-0">Loja de estudo · marcas e produtos fictícios · pagamento simulado.</p>
+          <p className="small mb-0">Demonstração pública: não informe dados pessoais reais. Os dados voltam ao estado inicial periodicamente.</p>
         </div>
         <ul className="list-unstyled small mb-0">
           <li>Frete grátis a partir de R$ 299,00</li>

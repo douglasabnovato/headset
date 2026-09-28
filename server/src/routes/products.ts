@@ -1,7 +1,8 @@
 /*
  * products.ts · Catálogo público e CRUD de produtos (exercício 10).
  * Leitura aberta com filtros, ordenação, paginação e cache; escrita só para
- * admin, com upload de imagem (PNG/JPG/WebP até 2 MB) ou URL.
+ * admin, com upload de imagem (PNG/JPG/WebP até 2 MB) ou URL. Na demonstração
+ * pública (DEMO=1) o upload fica desligado e só valem imagens do catálogo.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -60,6 +61,7 @@ export function rotasProdutos(db: DB, cache: Cache) {
     }),
     limits: { fileSize: 2 * 1024 * 1024 },
     fileFilter: (_req, file, cb) => {
+      if (config.demo) return cb(new HttpError(403, "Na demonstração pública o envio de imagens está desligado.", [{ campo: "image", mensagem: "Use uma imagem do catálogo, como /produtos/buds-air-preto.svg." }]));
       if (["image/png", "image/jpeg", "image/webp"].includes(file.mimetype)) cb(null, true);
       else cb(new HttpError(422, "Envie uma imagem PNG, JPG ou WebP.", [{ campo: "image", mensagem: "Formato não aceito." }]));
     },
@@ -105,6 +107,7 @@ export function rotasProdutos(db: DB, cache: Cache) {
   const montar = (body: unknown, arquivo: Express.Multer.File | undefined, exigirImagem: boolean) => {
     const d = produtoSchema.parse(body);
     const imageUrl = arquivo ? `/uploads/${arquivo.filename}` : d.imageUrl || undefined;
+    if (config.demo && d.imageUrl && !d.imageUrl.startsWith("/produtos/")) throw new HttpError(422, "Confira os campos destacados.", [{ campo: "imageUrl", mensagem: "Na demonstração, use uma imagem do catálogo (/produtos/…)." }]);
     if (exigirImagem && !imageUrl) throw new HttpError(422, "Confira os campos destacados.", [{ campo: "image", mensagem: "Envie uma imagem ou informe a URL." }]);
     if (d.compareAt && d.compareAt <= d.price) throw new HttpError(422, "Confira os campos destacados.", [{ campo: "compareAt", mensagem: "O preço 'de' deve ser maior que o preço de venda." }]);
     return {

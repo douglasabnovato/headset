@@ -1,0 +1,22 @@
+# Blueprint do Render: um único serviço web gratuito com a API e o front
+# (mesma origem para o cookie de sessão). O JWT_SECRET é gerado pelo Render.
+services:
+  - type: web
+    name: headset-store
+    runtime: node
+    plan: free
+    branch: main
+    autoDeployTrigger: commit
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NODE_ENV
+        value: production
+      - key: DEMO
+        value: "1"
+      - key: JWT_SECRET
+        generateValue: true
+# fim de render.yaml

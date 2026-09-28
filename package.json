@@ -5,6 +5,7 @@
   "type": "module",
   "description": "Headset Store · e-commerce de headphones fullstack em TypeScript (React + Vite / Express + Drizzle + SQLite)",
   "workspaces": ["server"],
+  "engines": { "node": ">=20" },
   "scripts": {
     "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w server\" \"vite\"",
     "dev:web": "vite",
@@ -12,6 +13,7 @@
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "start": "npm run build && concurrently -n api,web \"npm start -w server\" \"vite preview\"",
+    "start:prod": "npm start -w server",
     "db:seed": "npm run db:seed -w server",
     "test": "vitest run && npm test -w server",
     "typecheck": "tsc -b && npm run typecheck -w server"

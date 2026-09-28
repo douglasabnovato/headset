@@ -1,11 +1,16 @@
 /*
- * config.ts · Configuração da API lida das variáveis de ambiente, com
- * valores seguros para desenvolvimento. Em produção JWT_SECRET é obrigatório.
+ * config.ts · Configuração da API lida das variáveis de ambiente (e do
+ * server/.env, quando existir), com valores seguros para desenvolvimento.
+ * Em produção JWT_SECRET é obrigatório; DEMO=1 liga as travas da
+ * demonstração pública.
  */
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+try {
+  process.loadEnvFile(path.join(raiz, ".env"));
+} catch {}
 const producao = process.env.NODE_ENV === "production";
 
 if (producao && !process.env.JWT_SECRET) {
@@ -14,13 +19,15 @@ if (producao && !process.env.JWT_SECRET) {
 
 export const config = {
   producao,
+  demo: process.env.DEMO === "1",
   porta: Number(process.env.PORT ?? 3333),
-  databaseUrl: process.env.DATABASE_URL ?? path.join(raiz, "data", "headset.db"),
+  databaseUrl: process.env.DATABASE_URL || path.join(raiz, "data", "headset.db"),
   jwtSecret: process.env.JWT_SECRET ?? "dev-secret-troque-em-producao",
   jwtExpiraEm: "2h",
   cookieNome: "headset_session",
   pastaUploads: path.join(raiz, "uploads"),
   pastaMigracoes: path.join(raiz, "drizzle"),
+  pastaFront: path.resolve(raiz, "..", "dist"),
   freteGratisAPartirCents: 29900,
   freteCents: 1990,
 };
