@@ -54,7 +54,7 @@ Variáveis opcionais em `server/.env` (veja `.env.example`). Em produção, `JWT
 
 ## Em produção
 
-**Demonstração:** https://headset-store.onrender.com
+**Demonstração:** ainda não publicada. O `render.yaml` está pronto, e o passo a passo está em `docs/DEPLOY.md`.
 
 - Um único serviço gratuito no Render entrega a API e o front na mesma origem (o cookie de sessão continua `httpOnly` + `SameSite=Lax`, sem CORS).
 - Configuração em `render.yaml`: build com `npm ci --include=dev && npm run build`, início com `npm run start:prod`, health check em `/api/health`.
