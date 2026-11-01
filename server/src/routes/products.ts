@@ -81,6 +81,7 @@ export function rotasProdutos(db: DB, cache: Cache) {
         f.connection ? eq(products.connection, f.connection) : undefined,
         f.q ? or(like(products.name, `%${f.q}%`), like(products.description, `%${f.q}%`), like(products.color, `%${f.q}%`)) : undefined,
       ].filter(Boolean);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- o filter(Boolean) não estreita o tipo das condições
       const where = cond.length ? and(...(cond as any[])) : undefined;
       const ordem =
         f.sort === "menor-preco" ? [asc(products.priceCents)] : f.sort === "maior-preco" ? [desc(products.priceCents)] : f.sort === "novidades" ? [desc(products.id)] : [desc(sql`${products.stock} > 0`), asc(products.id)];
@@ -143,6 +144,7 @@ export function rotasProdutos(db: DB, cache: Cache) {
   r.post("/", exigirAdmin, upload.single("image"), (req, res) => {
     try {
       const v = montar(req.body, req.file, true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- montar() valida os campos, mas devolve tipo parcial
       const p = db.insert(products).values({ ...(v as any), slug: slugUnico(v.name) }).returning().get();
       cache.invalidar("produtos:");
       res.status(201).json({ product: publico(p) });
