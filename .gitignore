@@ -4,6 +4,8 @@ node_modules/
 # build e testes
 dist/
 coverage/
+test-results/
+playwright-report/
 *.tsbuildinfo
 
 # banco local e arquivos enviados pelo admin

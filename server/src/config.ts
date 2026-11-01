@@ -10,7 +10,9 @@ import { fileURLToPath } from "node:url";
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 try {
   process.loadEnvFile(path.join(raiz, ".env"));
-} catch {}
+} catch {
+  // Sem server/.env: vale o que estiver no ambiente
+}
 const producao = process.env.NODE_ENV === "production";
 
 if (producao && !process.env.JWT_SECRET) {

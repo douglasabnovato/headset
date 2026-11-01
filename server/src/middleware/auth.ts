@@ -11,6 +11,7 @@ import { HttpError } from "../lib/errors.js";
 export type Sessao = { id: number; role: "customer" | "admin"; name: string; email: string };
 
 declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace -- forma exigida para estender os tipos do Express
   namespace Express {
     interface Request {
       user?: Sessao;

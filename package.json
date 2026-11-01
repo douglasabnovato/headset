@@ -4,8 +4,12 @@
   "private": true,
   "type": "module",
   "description": "Headset Store · e-commerce de headphones fullstack em TypeScript (React + Vite / Express + Drizzle + SQLite)",
-  "workspaces": ["server"],
-  "engines": { "node": ">=20" },
+  "workspaces": [
+    "server"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "concurrently -n api,web -c blue,magenta \"npm run dev -w server\" \"vite\"",
     "dev:web": "vite",
@@ -16,7 +20,9 @@
     "start:prod": "npm start -w server",
     "db:seed": "npm run db:seed -w server",
     "test": "vitest run && npm test -w server",
-    "typecheck": "tsc -b && npm run typecheck -w server"
+    "typecheck": "tsc -b && npm run typecheck -w server",
+    "lint": "eslint . --max-warnings 0",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",
@@ -26,15 +32,20 @@
     "react-router-dom": "^7.9.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "1.56",
     "@testing-library/jest-dom": "^6.8.0",
     "@testing-library/react": "^16.3.0",
     "@types/react": "^19.1.0",
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^5.0.0",
     "concurrently": "^9.2.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "jsdom": "^26.1.0",
     "less": "^4.4.0",
     "typescript": "^5.9.0",
+    "typescript-eslint": "^8.72.1",
     "vite": "^7.1.0",
     "vitest": "^3.2.0"
   }
