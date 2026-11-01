@@ -5,6 +5,7 @@
  * trocar por BullMQ + Redis ou SQS mantendo enfileirar(nome, dados).
  */
 type Tarefa = { nome: string; dados: unknown; tentativa: number };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any -- cada tarefa define o formato dos próprios dados
 type Handler = (dados: any) => Promise<void> | void;
 
 export class Fila {

@@ -45,7 +45,9 @@ Cartão de teste: `4111 1111 1111 1111`, validade futura (ex.: `12/30`), CVV `12
 | Script | O que faz |
 |---|---|
 | `npm run dev` | API (tsx watch) + front (Vite) juntos |
-| `npm test` | testes do front (Vitest) e da API (Vitest + Supertest, banco em memória) |
+| `npm test` | testes do front (Vitest) e da API (Vitest + Supertest, banco em memória) |
+npm run lint       # ESLint, sem avisos
+npm run test:e2e   # compra de ponta a ponta, com API em memória e sem serviço externo
 | `npm run build` | checagem de tipos + build de produção em `dist/` |
 | `npm run db:seed` | apaga e recria os dados de exemplo (rode com a API parada, para não servir cache antigo) |
 | `npm run typecheck` | tipos do front e da API |
