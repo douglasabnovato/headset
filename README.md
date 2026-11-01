@@ -130,3 +130,9 @@ headset/
 
 ---
 Projeto de estudo · marcas, produtos e pagamentos fictícios · por [@douglasabnovato](https://github.com/douglasabnovato)
+
+## Próximos passos do responsável
+
+- Criar o serviço no Render com o `render.yaml` e conferir a demo.
+
+Acompanhamento na issue #4.
