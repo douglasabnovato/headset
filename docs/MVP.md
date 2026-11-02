@@ -18,7 +18,7 @@
 | 4 | Escopo enxuto | O que não entra está registrado | Atende: teste técnico adaptado, sem pagamento real |
 | 5 | Medição de uso | A métrica principal é coletada | Não se aplica antes de publicar |
 | 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: catálogo, produto, pedidos e checkout têm carregamento, erro e vazio, conferidos no código |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: 3,39 s em teste local (3,40, 3,39 e 3,11 s); falta medir depois de publicar |
+| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: 2,79 s em teste local (3,10, 2,79 e 2,26 s), depois de carregar a fonte só no `load`; antes, 3,39 s. Falta medir depois de publicar |
 | 8 | Acessibilidade básica | Lighthouse e teclado | Atende no build atual: Lighthouse 100, axe no CI em 3 telas e compra iniciada só com teclado |
 | 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Parcial: alertas corrigidos; SQLite perde dados a cada deploy, aceitável em demonstração |
 | 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: `main` sem proteção; o Render publicaria o que chega na `main` |
