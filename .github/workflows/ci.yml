@@ -1,12 +1,12 @@
-# CI do Headset Store: a cada push e pull request na main, instala,
+# CI do Headset Store: a cada push e pull request na main e nas developer/**, instala,
 # checa os tipos, roda os testes do front e da API e faz o build.
 name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [main, 'developer/**']
   pull_request:
-    branches: [main]
+    branches: [main, 'developer/**']
 
 permissions:
   contents: read
