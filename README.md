@@ -7,6 +7,29 @@
   <img alt="Vitrine no celular, tema escuro" src="./docs/imagens/vitrine-escura-mobile.jpg" width="200">
 </p>
 
+## Estado e próximos passos (ciclo de 03/11/2026)
+
+**O que foi feito** (06/11/2026, PRs #24 e #25)
+- Playwright 1.65.0: o 1.63 não instala o Chromium no `ubuntu-latest` atual. Os 5 testes de ponta a ponta passam.
+- CI também nos PRs para `developer/**`.
+- `docs/MVP.md` corrigido: o resumo dizia 3 de 12 e a tabela tinha 6. Agora são 6 de 12, com evidência e data.
+- `docs/PLANO-DE-ACAO.md` criado, com pesquisa, backlog e engenharia.
+- Issues #4 e #15 completadas no modelo do processo; 6 issues novas.
+
+**O que queremos fazer**
+- [#21](https://github.com/douglasabnovato/headset/issues/21) Reduzir o CSS do Bootstrap na primeira pintura.
+- [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado.
+- [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
+- [#23](https://github.com/douglasabnovato/headset/issues/23) Vitest 4 e `drizzle-kit` sem alertas.
+- [#4](https://github.com/douglasabnovato/headset/issues/4) Publicar no Render: o link deu 404 em 06/11 (responsável).
+- [#18](https://github.com/douglasabnovato/headset/issues/18) Proteger a `main` (responsável).
+- [#19](https://github.com/douglasabnovato/headset/issues/19) Confirmar a meta da hipótese (responsável).
+- [#20](https://github.com/douglasabnovato/headset/issues/20) Medir o uso da demonstração (responsável).
+
+**Onde está a documentação**
+- [docs/MVP.md](docs/MVP.md): critérios e estado.
+- [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md): seção "Ciclo de 03/11/2026".
+
 ## Sobre
 
 Loja de fones de ouvido construída a partir do teste técnico **Full Stack** (originalmente Laravel + Vue.js, loja de camisetas), adaptado para headphones e para uma stack 100% TypeScript. O card de destaque da vitrine é o layout original deste repositório (frete grátis, preço de/por, botão "físico" de jogo, estoque e ações), agora ligado a dados reais.
@@ -56,13 +79,13 @@ Variáveis opcionais em `server/.env` (veja `.env.example`). Em produção, `JWT
 
 ## Em produção
 
-**Demonstração:** ainda não publicada. O `render.yaml` está pronto, e o passo a passo está em `docs/DEPLOY.md`.
+**Demonstração:** ainda não publicada (`headset-store.onrender.com` deu 404 em 06/11/2026, ver #4). O `render.yaml` está pronto, e o passo a passo está em `docs/DEPLOY.md`.
 
 - Um único serviço gratuito no Render entrega a API e o front na mesma origem (o cookie de sessão continua `httpOnly` + `SameSite=Lax`, sem CORS).
 - Configuração em `render.yaml`: build com `npm ci --include=dev && npm run build`, início com `npm run start:prod`, health check em `/api/health`.
 - `DEMO=1` desliga o upload de imagens no admin (as contas de demonstração são públicas).
 - Limitações do plano gratuito: o serviço dorme após 15 minutos sem acesso e leva cerca de 1 minuto para acordar; o disco é temporário, então o banco volta aos dados de exemplo a cada reinício.
-- CI no GitHub Actions: tipos, testes e build a cada push na `main`.
+- CI no GitHub Actions: lint, tipos, testes, build e testes de ponta a ponta a cada push e PR na `main` e nas `developer/**`.
 - Passo a passo completo: [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Exercícios do teste

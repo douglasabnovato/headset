@@ -1,31 +1,33 @@
 # MVP — Headset Store
 
-> Criado em 31/10/2026, com os critérios usados no `movies`. Situação baseada em `AVALIACAO.md` e na conferência deste ciclo.
+> Criado em 31/10/2026, com os critérios usados no `movies`. Revisto em 06/11/2026 (ciclo de 03/11). **Nível: Vitrine (N2)**, 12 critérios. Testado no Windows com Node 24 e no CI com Node 22. Não houve teste com pessoas nem em aparelho real.
 
 ## Problema e hipótese
 
-**Problema e público:** Mostra a recrutadores uma loja fullstack completa em TypeScript, da vitrine ao pedido com transação e fila.
+**Problema e público:** mostra a recrutadores uma loja fullstack completa em TypeScript, da vitrine ao pedido com transação e fila.
 
-**Hipótese:** Quem avalia completa uma compra de demonstração em até 5 minutos pelo link publicado. Proposta inicial, para o responsável confirmar ou trocar. Sem medição, a meta ainda não pode ser conferida.
+**Hipótese:** quem avalia completa uma compra de demonstração em até 5 minutos pelo link publicado. Meta proposta pelo agente; confirmar é do responsável (#19). Medir depende da publicação (#4) e de uma ferramenta (#20).
 
-## 1. Critérios
+## 1. Critérios: 6 de 12 atendidos
 
-| # | Critério | Como verificar | Situação em 31/10/2026 |
+Antes deste ciclo: 5 de 12. O resumo dizia "3 de 12" com 6 "Atende" na tabela, então o critério 12 era "Parcial".
+
+| # | Critério | Como verificar | Situação em 06/11/2026 |
 |---|---|---|---|
 | 1 | Problema e público claros | Dá para explicar em uma frase | Atende |
-| 2 | Hipótese a validar | Existe uma aposta escrita, com meta | Parcial: meta proposta |
-| 3 | Fluxo principal completo | Uma pessoa conclui sem ajuda | Parcial: fluxo coberto por testes locais; **não está no ar** (#4) |
-| 4 | Escopo enxuto | O que não entra está registrado | Atende: teste técnico adaptado, sem pagamento real |
-| 5 | Medição de uso | A métrica principal é coletada | Não se aplica antes de publicar |
-| 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: catálogo, produto, pedidos e checkout têm carregamento, erro e vazio, conferidos no código |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: 2,79 s em teste local (3,10, 2,79 e 2,26 s), depois de carregar a fonte só no `load`; antes, 3,39 s. Falta medir depois de publicar |
-| 8 | Acessibilidade básica | Lighthouse e teclado | Atende no build atual: Lighthouse 100, axe no CI em 3 telas e compra iniciada só com teclado |
-| 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Parcial: alertas corrigidos; SQLite perde dados a cada deploy, aceitável em demonstração |
-| 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: `main` sem proteção; o Render publicaria o que chega na `main` |
-| 11 | Testes dos fluxos críticos | Testes automatizados no CI | Atende: 4 testes do front, 10 da API, compra de ponta a ponta e acessibilidade no CI |
-| 12 | Documentação honesta | Qualquer pessoa roda o projeto, e os números estão certos | Atende |
+| 2 | Hipótese a validar | Existe uma aposta escrita, com meta | Parcial: meta proposta, sem confirmação (#19) |
+| 3 | Fluxo principal completo | Uma pessoa conclui sem ajuda | Parcial: compra coberta pelo teste de ponta a ponta; **não está no ar** (404 em 06/11, #4) |
+| 4 | Escopo enxuto | O que não entra está registrado | Atende: teste técnico adaptado, sem pagamento real (seção 3) |
+| 5 | Medição de uso | A métrica principal é coletada | Não atende: sem site e sem ferramenta (#4, #20) |
+| 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: catálogo, produto, pedidos e checkout têm carregamento, erro e vazio; a compra de ponta a ponta passa no CI |
+| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: 2,79 s em teste local de 02/11 (3,10, 2,79 e 2,26 s). Sem site publicado, não houve medição em 06/11 (#15). O CSS inteiro do Bootstrap bloqueia a primeira pintura (#21) |
+| 8 | Acessibilidade básica | Lighthouse e teclado | Atende: Lighthouse 100 em 02/11; axe sem violação séria em 3 telas e compra iniciada só com teclado, no CI (5 testes Playwright passando em 06/11) |
+| 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Parcial: `npm audit --omit=dev` sem alertas; restam alertas moderados de desenvolvimento no Vitest 3 e no `drizzle-kit` (#23). SQLite perde dados a cada deploy, aceitável em demonstração |
+| 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI verde nos PRs, agora também para `developer/**`; a `main` segue sem proteção (#18) |
+| 11 | Testes dos fluxos críticos | Testes automatizados no CI | Atende: 4 testes do front, 10 da API e 5 de ponta a ponta (compra e acessibilidade) no CI |
+| 12 | Documentação honesta | Qualquer pessoa roda o projeto, e os números estão certos | Atende: resumo corrigido em 06/11; README com estado e próximos passos |
 
-**Resultado:** 3 de 12 critérios atendidos por inteiro. É um julgamento técnico.
+**Finalizado: não.** Faltam os critérios 7 (#21, e a medição da #15) e 9 (#23), que o código resolve. Os critérios 2 (#19), 3 (#4), 5 (#20) e 10 (#18) dependem do responsável.
 
 ## 2. Tarefas
 
@@ -34,11 +36,15 @@
 | 1 | Publicar no Render e conferir a demo | Com o responsável (#4) |
 | 2 | Adicionar lint | Feito |
 | 3 | Criar teste de ponta a ponta da compra | Feito |
+| 4 | Playwright 1.65 e CI nas `developer/**` | Feito em 06/11 |
+| 5 | Reduzir o CSS do Bootstrap | Issue #21 |
+| 6 | Compra como convidado | Issue #22 |
 
 ## 3. Fora do MVP
 
 Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode mudar com a decisão do responsável.
 
-## Medições de 02/11/2026
+## Medições
 
-Build local: LCP de 3,39 s, acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
+- **02/11/2026:** build local, LCP de 3,39 s e depois 2,79 s (fonte só no `load`), acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
+- **06/11/2026:** `https://headset-store.onrender.com` respondeu 404. Sem site publicado, o LCP no ar não foi medido.
