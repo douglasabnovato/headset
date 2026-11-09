@@ -25,7 +25,8 @@
     </script>
     <script>
       /* Só na vitrine sem filtros: pede a imagem do destaque (o LCP) antes do JavaScript e da API (#15). */
-      if (location.pathname === "/" && !location.search) {
+      if (location.pathname !== "/" || location.search) document.documentElement.className = "no-shell";
+      else {
         var destaque = document.createElement("link");
         destaque.rel = "preload";
         destaque.as = "image";
@@ -34,11 +35,21 @@
         document.head.appendChild(destaque);
       }
     </script>
+    <style>
+      /* O esqueleto vale só para a vitrine sem filtros */
+      .no-shell #app-shell { display: none; }
+    </style>
     <title>Headset Store · headphones, fones gamer e in-ear</title>
   </head>
   <body>
     <noscript>Ative o JavaScript para usar a Headset Store.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Esqueleto da vitrine, trocado pelo React: a imagem do destaque (o LCP) pinta antes do JavaScript (#15). Mesmas classes da página. -->
+      <div id="app-shell" aria-hidden="true">
+        <header class="topo sticky-top"><nav class="navbar navbar-expand-lg"><div class="container"><span class="navbar-brand marca"><span class="marca__icone">🎧</span> Headset<span class="marca__store">store</span></span><span class="navbar-toggler"><span class="navbar-toggler-icon"></span></span></div></nav></header>
+        <main class="container py-4"><section class="destaque"><div class="destaque__imagem"><img src="/produtos/kitty-quartz.png" alt="" width="249" height="223" fetchpriority="high" /></div><div class="destaque__detalhes destaque__detalhes--carregando"></div></section></main>
+      </div>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>

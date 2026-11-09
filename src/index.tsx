@@ -6,10 +6,16 @@ import { createRoot } from "react-dom/client";
 import "./styles/bootstrap.scss";
 import "./styles/main.less";
 import App from "./App";
+import { esperarDestaque } from "./lib/esperarDestaque";
 
-createRoot(document.getElementById("root") as HTMLElement).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
-);
+/* O React só troca o esqueleto depois que a imagem do destaque pinta (até 2,5 s) (#15). */
+esperarDestaque()
+  .catch(() => "erro")
+  .then(() =>
+    createRoot(document.getElementById("root") as HTMLElement).render(
+      <StrictMode>
+        <App />
+      </StrictMode>
+    )
+  );
 /* fim de index.tsx */
