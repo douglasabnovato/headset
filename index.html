@@ -25,7 +25,9 @@
     </script>
     <script>
       /* Só na vitrine sem filtros: pede a imagem do destaque (o LCP) antes do JavaScript e da API (#15). */
-      if (location.pathname !== "/" || location.search) document.documentElement.className = "no-shell";
+      /* As mesmas chaves que tiram o destaque da Home (src/pages/Home.tsx) */
+      var filtrando = ["q", "type", "connection", "sort", "page"].some(function (k) { return new URLSearchParams(location.search).has(k); });
+      if (location.pathname !== "/" || filtrando) document.documentElement.classList.add("no-shell");
       else {
         var destaque = document.createElement("link");
         destaque.rel = "preload";
@@ -34,6 +36,13 @@
         destaque.setAttribute("fetchpriority", "high");
         document.head.appendChild(destaque);
       }
+    </script>
+    <script>
+      /* Se o JavaScript da loja não carregar, o esqueleto avisa em vez de ficar parado. */
+      setTimeout(function () {
+        var detalhes = document.querySelector("#app-shell .destaque__detalhes");
+        if (detalhes) detalhes.textContent = "Não foi possível carregar a loja. Recarregue a página.";
+      }, 10000);
     </script>
     <style>
       /* O esqueleto vale só para a vitrine sem filtros */

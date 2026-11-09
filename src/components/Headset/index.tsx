@@ -17,7 +17,7 @@ export const DESTAQUE_IMAGEM = "/produtos/kitty-quartz.png";
 /*
  * Destaque da vitrine. Sem o produto (a API ainda não respondeu), mostra já a
  * imagem, que é o maior elemento da tela (LCP), e reserva o espaço do texto.
- * O <img> é o mesmo nó nos dois estados, então a troca não gera um LCP novo.
+ * O <img> é o mesmo nó do estado sem produto ao carregado (a troca não gera LCP novo); o esqueleto do index.html é outro nó, e src/lib/esperarDestaque.ts segura a montagem até ele contar como LCP.
  */
 export default function Headset({ produto }: { produto: Produto | null }) {
   const { adicionar, alternarDesejo, ehDesejo } = useCart();
