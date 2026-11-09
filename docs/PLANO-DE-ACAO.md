@@ -110,3 +110,35 @@
 **Este ciclo executa.** #21 e #23, e a reorganização do `MVP.md`.
 
 **Vira issue.** #26 (`npm audit` no CI). O LCP segue na #15. Seguem com o responsável: #4, #18, #19, #20.
+
+## Ciclo de 09/11/2026
+
+> Branch `feature/2026-11-09`, criada da `developer/sprint-2026-11-12`; PR #30 para a sprint. A `main` fica com o responsável (PR #29). Decisão: `decisao-2026-11-09.md`, opção C.
+
+### Produto
+
+Sem mudança no problema, no público e na hipótese. Foco: o critério 7 (#15).
+
+### Engenharia
+
+**O que as fases do LCP mostraram.** Na sprint, o LCP era a imagem do destaque desenhada pelo React: espera de 0,5 a 1,0 s e atraso de renderização de 2,0 a 2,5 s (JavaScript e chamada à API antes da imagem). Reduzir o CSS no ciclo anterior não mexia nisso.
+
+**O que mudou.**
+- `index.html`: esqueleto com o cabeçalho e o destaque, com as classes da página e a imagem `/produtos/kitty-quartz.png`; preload da imagem. Fora da vitrine sem filtros (mesmas chaves da `Home`: q, type, connection, sort, page), a classe `no-shell` oculta o esqueleto. Sem o JavaScript em 10 s, o esqueleto avisa.
+- `src/lib/esperarDestaque.ts`: o `createRoot().render` espera o LCP registrar a imagem do esqueleto; desiste 1 s depois do load (com decodificação e dois quadros), em 2,5 s, com a aba oculta, sem suporte ou com a imagem quebrada.
+- `Headset`: sem o produto, já mostra a imagem e "Carregando o destaque…"; o `<img>` é o mesmo nó quando o produto chega. Se a API do destaque falhar, a seção some.
+- Tentativa intermediária, registrada: só o esqueleto, sem a espera, não bastou. No Lighthouse a primeira pintura vem depois do load, e o React trocava o esqueleto antes (LCP de 3,1 a 3,4 s). A espera por "load + quadros" também não bastou; a entrada de LCP resolveu.
+
+**Qualidade.** Vitest: 2 testes do destaque e 5 da espera. CLS da vitrine no navegador local: 0,64 antes, 0,01 depois.
+
+**Riscos.** A imagem do esqueleto também baixa fora da vitrine (oculta): vira a #31. CLS da página de produto (0,26, igual antes e depois): #32.
+
+### Plano de ação
+
+**Este ciclo executa.** Esqueleto, espera, testes, medição local e documentação.
+
+**Medição (09/11/2026).** Lighthouse 12.8.2 móvel, build de produção com `vite preview` e API local: antes 3,40 s de mediana (5 execuções); depois 2,07 s (5 execuções), imagem do esqueleto como LCP em todas. Detalhes no `MVP.md`.
+
+**Segue em issue.** #15 até a medição no site, que depende da publicação (#4). #31 e #32 (agente). #18, #19, #20 (responsável).
+
+**Revisão independente (09/11/2026).** Um subagente leu só o diff, em duas rodadas. Corrigido: `aria-busy` na seção que tinha o aviso de carregamento; `/?utm_source=x` perdia o esqueleto; `className` apagava outras classes do `<html>`; esqueleto parado sem aviso se o JavaScript falhar. Aceito: com a API respondendo sem produto (e sem erro), o destaque ficaria carregando; a API devolve 404 nesse caso.

@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import { CONEXOES, TIPOS, type Pagina, type Produto } from "../api/client";
 import { useApi } from "../hooks/useApi";
 import ProductCard from "../components/ProductCard";
-import Headset from "../components/Headset";
+import Headset, { DESTAQUE_SLUG } from "../components/Headset";
 import { Carregando, Vazio } from "../components/ui";
 
 /* Página inicial. */
@@ -15,7 +15,7 @@ export default function Home() {
   const [params, setParams] = useSearchParams();
   const query = params.toString();
   const { dados, erro, carregando, recarregar } = useApi<Pagina<Produto>>(`/products${query ? `?${query}` : ""}`);
-  const destaque = useApi<{ product: Produto }>("/products/headset-kitty-quartz-rosa-quartzo");
+  const destaque = useApi<{ product: Produto }>(`/products/${DESTAQUE_SLUG}`);
   const tituloRef = useRef<HTMLHeadingElement>(null);
   const filtrando = ["q", "type", "connection", "sort", "page"].some((k) => params.has(k));
 
@@ -35,7 +35,7 @@ export default function Home() {
 
   return (
     <>
-      {!filtrando && destaque.dados && <Headset produto={destaque.dados.product} />}
+      {!filtrando && !destaque.erro && <Headset produto={destaque.dados?.product ?? null} />}
       <section aria-labelledby="catalogo-titulo" className="mt-4">
         <div className="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-3">
           <h2 id="catalogo-titulo" ref={tituloRef} className="h3 mb-0" tabIndex={-1}>

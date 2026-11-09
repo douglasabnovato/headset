@@ -6,9 +6,42 @@
 
 **Resumo:** 7 de 12 aplicáveis atendidos (1, 4, 6, 8, 9, 11 e 12).
 
-**Finalizado:** não. Falta o critério 7 (LCP), que o código resolve (#15). Os critérios 2 (#19), 3 (#4), 5 (#20) e 10 (#18) dependem do responsável.
+**Finalizado:** sim
 
-## Critérios em 09/11/2026 (ciclo de 07/11/2026)
+O que o código resolve está feito. O critério 7 passou da meta no build local (mediana de 2,07 s), mas no N2 só conta a medição no site, que depende da publicação (#4); a #15 tem o passo a passo. Os critérios 2 (#19), 3 (#4), 5 (#20) e 10 (#18) também dependem do responsável.
+
+## Critérios em 09/11/2026 (ciclo de 09/11/2026)
+
+| # | Critério | Situação | Evidência (comando, data, resultado) ou o que falta | Issue |
+|---|---|---|---|---|
+| 1 | Problema e público claros | Atende | Uma frase, em "Problema e hipótese" abaixo | — |
+| 2 | Hipótese a validar | Parcial | Meta proposta (compra de demonstração em até 5 minutos), sem confirmação | #19 |
+| 3 | Fluxo principal completo | Parcial | Compra coberta pelo teste de ponta a ponta. Não está no ar: `curl https://headset-store.onrender.com` deu 404 em 09/11/2026 | #4 |
+| 4 | Escopo enxuto | Atende | Teste técnico adaptado, sem pagamento real ("Fora do MVP") | — |
+| 5 | Medição de uso | Não atende | Sem site e sem ferramenta | #4, #20 |
+| 6 | Falhas tratadas | Atende | Catálogo, produto, pedidos e checkout com carregamento, erro e vazio; compra de ponta a ponta no CI | — |
+| 7 | Desempenho aceitável | Parcial | Lighthouse 12.8.2 local, móvel simulado, build de produção, `timeout 150`, 09/11/2026 (ciclo de 09/11). Antes (sprint): 3,43, 3,37, 3,58, 3,39 e 3,40 s (mediana 3,40 s), LCP = imagem do React, 2,0 a 2,5 s de atraso de renderização. Depois (PR #30, esqueleto no HTML): 2,07, 2,08, 2,05, 2,07 e 2,17 s (mediana **2,07 s**; TBT de 108 a 219 ms), LCP = imagem do esqueleto nas 5. Numa série com a máquina carregada (FCP observado de 1,6 a 1,8 s): 2,75, 2,77 e 2,08 s. No N2 só vale a medição no site, que não existe (#4, responsável) | #15, #4 |
+| 8 | Acessibilidade básica | Atende | Lighthouse acessibilidade 100 nas 6 execuções de 09/11/2026; axe sem violação séria em 3 telas e compra iniciada só com teclado (Playwright no CI) | — |
+| 9 | Segurança e conformidade | Atende | `npm audit` (todas as dependências, inclusive desenvolvimento), 09/11/2026: "found 0 vulnerabilities". SQLite perde dados a cada deploy, aceito em demonstração | #26 |
+| 10 | Entrega confiável | Parcial | CI verde nos PRs, também para `developer/**`; a `main` segue sem proteção | #18 |
+| 11 | Testes dos fluxos críticos | Atende | `npm test`, 09/11/2026: 11 testes do front (2 do destaque e 5 da espera do esqueleto, novos) e 10 da API passam (Vitest 4). 5 de ponta a ponta no CI do PR #30 | — |
+| 12 | Documentação honesta | Atende | Uma tabela só, resumo batendo com ela; README com estado e próximos passos | — |
+
+**CSS do Bootstrap (#21), `npx vite build`, 09/11/2026:** de 240,69 KB (gzip 33,63 KB) para 136,42 KB (gzip 22,06 KB): -43% sem gzip e -34% com gzip. Conferido que as 155 classes do Bootstrap citadas no código seguem no CSS novo, e telas de vitrine, carrinho e checkout vistas nos temas claro e escuro.
+
+## Problema e hipótese
+
+**Problema e público:** mostra a recrutadores uma loja fullstack completa em TypeScript, da vitrine ao pedido com transação e fila.
+
+**Hipótese:** quem avalia completa uma compra de demonstração em até 5 minutos pelo link publicado. Meta proposta pelo agente; confirmar é do responsável (#19). Medir depende da publicação (#4) e de uma ferramenta (#20).
+
+## Fora do MVP
+
+Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode mudar com a decisão do responsável.
+
+## Histórico
+
+### Tabela de 09/11/2026 (ciclo de 07/11/2026): 7 de 12 atendidos, finalizado: não
 
 | # | Critério | Situação | Evidência (comando, data, resultado) ou o que falta | Issue |
 |---|---|---|---|---|
@@ -26,18 +59,6 @@
 | 12 | Documentação honesta | Atende | Uma tabela só, resumo batendo com ela; README com estado e próximos passos | — |
 
 **CSS do Bootstrap (#21), `npx vite build`, 09/11/2026:** de 240,69 KB (gzip 33,63 KB) para 136,42 KB (gzip 22,06 KB): -43% sem gzip e -34% com gzip. Conferido que as 155 classes do Bootstrap citadas no código seguem no CSS novo, e telas de vitrine, carrinho e checkout vistas nos temas claro e escuro.
-
-## Problema e hipótese
-
-**Problema e público:** mostra a recrutadores uma loja fullstack completa em TypeScript, da vitrine ao pedido com transação e fila.
-
-**Hipótese:** quem avalia completa uma compra de demonstração em até 5 minutos pelo link publicado. Meta proposta pelo agente; confirmar é do responsável (#19). Medir depende da publicação (#4) e de uma ferramenta (#20).
-
-## Fora do MVP
-
-Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode mudar com a decisão do responsável.
-
-## Histórico
 
 ### Revisão de 06/11/2026 (ciclo de 03/11/2026): 6 de 12 atendidos
 

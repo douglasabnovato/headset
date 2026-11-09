@@ -7,18 +7,25 @@
   <img alt="Vitrine no celular, tema escuro" src="./docs/imagens/vitrine-escura-mobile.jpg" width="200">
 </p>
 
-## Estado e próximos passos (ciclo de 07/11/2026)
+## Estado e próximos passos (ciclo de 09/11/2026)
 
-**Estado:** Vitrine (N2), 7 de 12 critérios atendidos; **Finalizado: não**, falta o LCP (#15). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
+**Estado:** Vitrine (N2), 7 de 12 critérios atendidos; **Finalizado: sim** do lado do código. O LCP local caiu de 3,40 s para 2,07 s; medir no site depende da publicação (#4). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
 
-**O que foi feito neste ciclo** (PR para a `developer/sprint-2026-11-12`; a `main` espera a revisão do responsável)
+**O que foi feito no ciclo de 09/11/2026** (PR #30 para a `developer/sprint-2026-11-12`)
+- Esqueleto da vitrine no `index.html`, com a imagem do destaque; o React espera essa imagem contar como LCP antes de montar (até 2,5 s).
+- O destaque mostra a imagem antes da resposta da API.
+- LCP local (Lighthouse móvel, 5 execuções): mediana de 3,40 s antes e 2,07 s depois. CLS da vitrine: 0,64 para 0,01.
+
+**O que foi feito no ciclo de 07/11/2026** (PR para a `developer/sprint-2026-11-12`; a `main` espera a revisão do responsável)
 - Bootstrap por Sass, só com os módulos e utilitários usados: o CSS do build caiu de 240,69 KB para 136,42 KB (-43%; com gzip, -34%) (#21).
 - `npm audit` sem alertas, inclusive nas dependências de desenvolvimento: Vitest 4 e overrides de `esbuild` e `minimatch` (#23).
 - LCP medido antes e depois no build local: segue em cerca de 3,4 s; o gargalo é o JavaScript antes da imagem do destaque (#15).
 - `docs/MVP.md` com uma tabela só, a atual; as anteriores foram para "Histórico".
 
 **Próximos passos**
-- [#15](https://github.com/douglasabnovato/headset/issues/15) Reduzir o LCP móvel e medir no site publicado.
+- [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado (local: 2,07 s).
+- [#31](https://github.com/douglasabnovato/headset/issues/31) Não baixar a imagem do destaque fora da vitrine.
+- [#32](https://github.com/douglasabnovato/headset/issues/32) CLS da página de produto até 0,1.
 - [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
 - [#26](https://github.com/douglasabnovato/headset/issues/26) Rodar `npm audit` no CI.
 - [#4](https://github.com/douglasabnovato/headset/issues/4) Publicar no Render (responsável).
@@ -28,7 +35,7 @@
 
 **Onde está a documentação**
 - [docs/MVP.md](docs/MVP.md): critérios e estado.
-- [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md): seção "Ciclo de 07/11/2026".
+- [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md): seções "Ciclo de 07/11/2026" e "Ciclo de 09/11/2026".
 
 ## Sobre
 

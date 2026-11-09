@@ -23,11 +23,42 @@
     <script>
       try { var t = JSON.parse(localStorage.getItem("headset:tema")); if (t) document.documentElement.setAttribute("data-bs-theme", t); } catch (e) {}
     </script>
+    <script>
+      /* Só na vitrine sem filtros: pede a imagem do destaque (o LCP) antes do JavaScript e da API (#15). */
+      /* As mesmas chaves que tiram o destaque da Home (src/pages/Home.tsx) */
+      var filtrando = ["q", "type", "connection", "sort", "page"].some(function (k) { return new URLSearchParams(location.search).has(k); });
+      if (location.pathname !== "/" || filtrando) document.documentElement.classList.add("no-shell");
+      else {
+        var destaque = document.createElement("link");
+        destaque.rel = "preload";
+        destaque.as = "image";
+        destaque.href = "/produtos/kitty-quartz.png";
+        destaque.setAttribute("fetchpriority", "high");
+        document.head.appendChild(destaque);
+      }
+    </script>
+    <script>
+      /* Se o JavaScript da loja não carregar, o esqueleto avisa em vez de ficar parado. */
+      setTimeout(function () {
+        var detalhes = document.querySelector("#app-shell .destaque__detalhes");
+        if (detalhes) detalhes.textContent = "Não foi possível carregar a loja. Recarregue a página.";
+      }, 10000);
+    </script>
+    <style>
+      /* O esqueleto vale só para a vitrine sem filtros */
+      .no-shell #app-shell { display: none; }
+    </style>
     <title>Headset Store · headphones, fones gamer e in-ear</title>
   </head>
   <body>
     <noscript>Ative o JavaScript para usar a Headset Store.</noscript>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Esqueleto da vitrine, trocado pelo React: a imagem do destaque (o LCP) pinta antes do JavaScript (#15). Mesmas classes da página. -->
+      <div id="app-shell" aria-hidden="true">
+        <header class="topo sticky-top"><nav class="navbar navbar-expand-lg"><div class="container"><span class="navbar-brand marca"><span class="marca__icone">🎧</span> Headset<span class="marca__store">store</span></span><span class="navbar-toggler"><span class="navbar-toggler-icon"></span></span></div></nav></header>
+        <main class="container py-4"><section class="destaque"><div class="destaque__imagem"><img src="/produtos/kitty-quartz.png" alt="" width="249" height="223" fetchpriority="high" /></div><div class="destaque__detalhes destaque__detalhes--carregando"></div></section></main>
+      </div>
+    </div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
 </html>
