@@ -24,7 +24,7 @@ export default function Headset({ produto }: { produto: Produto | null }) {
   const avisar = useToast();
   if (!produto) {
     return (
-      <section className="destaque" aria-busy="true">
+      <section className="destaque">
         <div className="destaque__imagem">
           <img src={DESTAQUE_IMAGEM} alt="" width={249} height={223} fetchPriority="high" />
         </div>
