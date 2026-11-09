@@ -12,7 +12,7 @@
 **Estado:** Vitrine (N2), 7 de 12 critérios atendidos; **Finalizado: não**, falta o LCP (#15). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
 
 **O que foi feito neste ciclo** (PR para a `developer/sprint-2026-11-12`; a `main` espera a revisão do responsável)
-- Bootstrap por Sass, só com os módulos e utilitários usados: o CSS do build caiu de 240,69 KB para 136,06 KB (-43%; com gzip, -35%) (#21).
+- Bootstrap por Sass, só com os módulos e utilitários usados: o CSS do build caiu de 240,69 KB para 136,42 KB (-43%; com gzip, -34%) (#21).
 - `npm audit` sem alertas, inclusive nas dependências de desenvolvimento: Vitest 4 e overrides de `esbuild` e `minimatch` (#23).
 - LCP medido antes e depois no build local: segue em cerca de 3,4 s; o gargalo é o JavaScript antes da imagem do destaque (#15).
 - `docs/MVP.md` com uma tabela só, a atual; as anteriores foram para "Histórico".

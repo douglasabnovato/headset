@@ -25,7 +25,7 @@
 | 11 | Testes dos fluxos críticos | Atende | `npm test`, 09/11/2026: 4 testes do front e 10 da API passam (Vitest 4). 5 de ponta a ponta no CI | — |
 | 12 | Documentação honesta | Atende | Uma tabela só, resumo batendo com ela; README com estado e próximos passos | — |
 
-**CSS do Bootstrap (#21), `npx vite build`, 09/11/2026:** de 240,69 KB (gzip 33,63 KB) para 136,06 KB (gzip 22,00 KB): -43% sem gzip e -35% com gzip. Conferido que as 155 classes do Bootstrap citadas no código seguem no CSS novo, e telas de vitrine, carrinho e checkout vistas nos temas claro e escuro.
+**CSS do Bootstrap (#21), `npx vite build`, 09/11/2026:** de 240,69 KB (gzip 33,63 KB) para 136,42 KB (gzip 22,06 KB): -43% sem gzip e -34% com gzip. Conferido que as 155 classes do Bootstrap citadas no código seguem no CSS novo, e telas de vitrine, carrinho e checkout vistas nos temas claro e escuro.
 
 ## Problema e hipótese
 

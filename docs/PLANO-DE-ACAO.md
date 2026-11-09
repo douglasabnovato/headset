@@ -74,7 +74,7 @@
 
 | Ideia | O que levamos para o projeto | Fonte |
 |---|---|---|
-| O guia de otimização do Bootstrap 5.3 recomenda importar por Sass só os componentes usados | `src/styles/bootstrap.scss` importa 18 módulos e deixa de fora 13 (modal, dropdown, carousel e outros) | [Bootstrap: Optimize](https://getbootstrap.com/docs/5.3/customize/optimize/) |
+| O guia de otimização do Bootstrap 5.3 recomenda importar por Sass só os componentes usados | `src/styles/bootstrap.scss` importa 19 módulos e deixa de fora 13 (modal, dropdown, carousel e outros) | [Bootstrap: Optimize](https://getbootstrap.com/docs/5.3/customize/optimize/) |
 | A API de utilitários do Bootstrap é um mapa Sass (`$utilities`) que pode ser alterado antes de gerar as classes | Grupos sem uso removidos com `map-remove` e variantes responsivas só onde a loja usa | [Bootstrap: Utility API](https://getbootstrap.com/docs/5.3/utilities/api/), [Bootstrap: Sass](https://getbootstrap.com/docs/5.3/customize/sass/) |
 
 **Backlog priorizado (impacto × esforço).**
@@ -97,7 +97,7 @@
 
 **Riscos.**
 - Componente novo do Bootstrap precisa ser importado em `src/styles/bootstrap.scss`, ou fica sem estilo. O arquivo diz isso no topo.
-- O Sass mostra avisos de depreciação do `@import` do Bootstrap 5.3; silenciados só para as dependências em `vite.config.ts`.
+- O Sass mostra avisos de depreciação do `@import` do Bootstrap 5.3; silenciados em `vite.config.ts` (`quietDeps` para as dependências e `silenceDeprecations` para os 4 tipos de aviso, que também aparecem no `bootstrap.scss` do projeto).
 - Os overrides de `esbuild` (via `drizzle-kit`) e `minimatch` (via `typescript-eslint`) devem sair quando esses pacotes atualizarem.
 - O LCP não melhorou com o CSS menor: o gargalo é o JavaScript e a API antes da imagem (#15).
 
