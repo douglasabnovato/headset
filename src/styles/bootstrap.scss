@@ -1,0 +1,68 @@
+/*
+ * bootstrap.scss · Só as partes do Bootstrap 5.3 que a loja usa (#21).
+ * Segue a "opção B" do guia oficial de Sass: funções, variáveis, mapas e
+ * mixins primeiro; depois os módulos usados. Ficam de fora accordion,
+ * button-group, carousel, close, dropdown, list-group, modal, offcanvas,
+ * placeholders, popover, progress, toasts e tooltip.
+ * Ao usar um componente novo do Bootstrap, importe o módulo aqui.
+ */
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/spinners";
+@import "bootstrap/scss/helpers";
+
+/*
+ * Utilitários responsivos só onde a loja usa (my-lg, mx-lg, ms-lg, gap-lg,
+ * flex-md-row, align-items-lg). Os demais saem sem as 5 variantes de tela,
+ * que eram a maior parte do CSS. Para usar outro, inclua a chave na lista.
+ */
+$responsivos-usados: "margin", "margin-x", "margin-y", "margin-top", "margin-end", "margin-bottom", "margin-start", "gap", "flex-direction", "align-items";
+@each $chave, $utilitario in $utilities {
+  @if type-of($utilitario) == "map" and map-get($utilitario, responsive) == true and not index($responsivos-usados, $chave) {
+    $utilities: map-merge($utilities, ($chave: map-merge($utilitario, (responsive: false))));
+  }
+}
+
+/*
+ * Grupos de utilitários que a loja não usa (conferido com grep em src/ em 09/11/2026).
+ * Para usar um deles, tire a chave desta lista.
+ */
+$utilities: map-remove(
+  $utilities,
+  "float", "object-fit", "overflow", "overflow-x", "overflow-y", "shadow", "focus-ring",
+  "top", "bottom", "start", "end", "translate-middle",
+  "border", "border-top", "border-end", "border-bottom", "border-start", "border-color",
+  "subtle-border-color", "border-width", "border-opacity",
+  "max-width", "viewport-width", "min-viewport-width", "max-height", "viewport-height", "min-viewport-height",
+  "flex-shrink", "order", "negative-margin", "negative-margin-x", "negative-margin-y",
+  "negative-margin-top", "negative-margin-end", "negative-margin-bottom", "negative-margin-start",
+  "font-family", "font-style", "line-height", "text-decoration", "text-transform", "word-wrap",
+  "text-opacity", "link-opacity", "link-offset", "link-underline", "link-underline-opacity",
+  "background-color", "bg-opacity", "subtle-background-color", "gradient",
+  "user-select", "pointer-events", "rounded-top", "rounded-end", "rounded-bottom", "rounded-start",
+  "visibility", "z-index"
+);
+
+@import "bootstrap/scss/utilities/api";
+/* fim de bootstrap.scss */
