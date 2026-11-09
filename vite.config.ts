@@ -12,6 +12,8 @@ export default defineConfig({
   publicDir: "static",
   server: { port: 5173, proxy: { "/api": api, "/uploads": api } },
   preview: { port: 4173, proxy: { "/api": api, "/uploads": api } },
+  /* Bootstrap 5.3 ainda usa @import e funções globais do Sass: silencia só esses avisos de depreciação */
+  css: { preprocessorOptions: { scss: { quietDeps: true, silenceDeprecations: ["import", "global-builtin", "color-functions", "if-function"] } } },
   build: { sourcemap: false, chunkSizeWarningLimit: 600 },
   test: { environment: "jsdom", include: ["src/**/*.test.{ts,tsx}"] },
 });
