@@ -23,6 +23,17 @@
     <script>
       try { var t = JSON.parse(localStorage.getItem("headset:tema")); if (t) document.documentElement.setAttribute("data-bs-theme", t); } catch (e) {}
     </script>
+    <script>
+      /* Só na vitrine sem filtros: pede a imagem do destaque (o LCP) antes do JavaScript e da API (#15). */
+      if (location.pathname === "/" && !location.search) {
+        var destaque = document.createElement("link");
+        destaque.rel = "preload";
+        destaque.as = "image";
+        destaque.href = "/produtos/kitty-quartz.png";
+        destaque.setAttribute("fetchpriority", "high");
+        document.head.appendChild(destaque);
+      }
+    </script>
     <title>Headset Store · headphones, fones gamer e in-ear</title>
   </head>
   <body>

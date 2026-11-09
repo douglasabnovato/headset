@@ -8,11 +8,32 @@ import type { Produto } from "../../api/client";
 import { moeda } from "../../lib/format";
 import { retrato, useCart } from "../../context/CartContext";
 import { useToast } from "../../context/ToastContext";
+import { Carregando } from "../ui";
 
-/* Destaque da vitrine. */
-export default function Headset({ produto }: { produto: Produto }) {
+/* Produto do destaque e a imagem dele: o index.html já pede a imagem, antes do JavaScript (#15). */
+export const DESTAQUE_SLUG = "headset-kitty-quartz-rosa-quartzo";
+export const DESTAQUE_IMAGEM = "/produtos/kitty-quartz.png";
+
+/*
+ * Destaque da vitrine. Sem o produto (a API ainda não respondeu), mostra já a
+ * imagem, que é o maior elemento da tela (LCP), e reserva o espaço do texto.
+ * O <img> é o mesmo nó nos dois estados, então a troca não gera um LCP novo.
+ */
+export default function Headset({ produto }: { produto: Produto | null }) {
   const { adicionar, alternarDesejo, ehDesejo } = useCart();
   const avisar = useToast();
+  if (!produto) {
+    return (
+      <section className="destaque" aria-busy="true">
+        <div className="destaque__imagem">
+          <img src={DESTAQUE_IMAGEM} alt="" width={249} height={223} fetchPriority="high" />
+        </div>
+        <div className="destaque__detalhes destaque__detalhes--carregando">
+          <Carregando texto="Carregando o destaque…" />
+        </div>
+      </section>
+    );
+  }
   const desejo = ehDesejo(produto.id);
   const semEstoque = produto.stock <= 0;
 
