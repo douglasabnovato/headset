@@ -7,6 +7,7 @@ import "./styles/bootstrap.scss";
 import "./styles/main.less";
 import App from "./App";
 import { esperarDestaque } from "./lib/esperarDestaque";
+import { iniciarMedicao } from "./lib/medicao";
 
 /* O React só troca o esqueleto depois que a imagem do destaque pinta (até 2,5 s) (#15). */
 esperarDestaque()
@@ -18,4 +19,7 @@ esperarDestaque()
       </StrictMode>
     )
   );
+
+/* Medição de uso só no build de produção e fora de testes automatizados (D5). */
+iniciarMedicao(document, { producao: import.meta.env.PROD, automatizado: navigator.webdriver });
 /* fim de index.tsx */

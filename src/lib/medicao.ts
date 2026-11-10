@@ -1,0 +1,38 @@
+/*
+ * medicao.ts · Medição de uso (critério 5, decisão D5 de 10/11/2026): GoatCounter,
+ * sem cookie e sem dado pessoal. Conta o caminho da visita e o evento
+ * "compra-concluida" quando um pedido de demonstração é confirmado (só o nome
+ * do evento; nada do pedido). Só carrega no build de produção e fora de
+ * navegador automatizado (Playwright). A conta `douglasabnovato` é do responsável.
+ */
+export const ENDERECO_CONTAGEM = "https://douglasabnovato.goatcounter.com/count";
+export const SCRIPT_CONTAGEM = "https://gc.zgo.at/count.js";
+
+type Ambiente = { producao: boolean; automatizado: boolean };
+type Contador = { count: (dados: { path: string; title?: string; event: boolean }) => void };
+
+/* Diz se a visita deve ser contada. */
+export function deveMedir({ producao, automatizado }: Ambiente) {
+  return producao && !automatizado;
+}
+
+/* Acrescenta o script do GoatCounter uma única vez, se a visita deve ser contada. */
+export function iniciarMedicao(documento: Document, ambiente: Ambiente) {
+  if (!deveMedir(ambiente)) return false;
+  if (documento.querySelector("script[data-goatcounter]")) return true;
+  const script = documento.createElement("script");
+  script.async = true;
+  script.src = SCRIPT_CONTAGEM;
+  script.dataset.goatcounter = ENDERECO_CONTAGEM;
+  documento.body.appendChild(script);
+  return true;
+}
+
+/* Conta um evento pelo nome, se o GoatCounter estiver carregado; sem ele, não faz nada. */
+export function contarEvento(nome: string, janela: (Window & { goatcounter?: Contador }) | undefined = typeof window === "undefined" ? undefined : window) {
+  const contador = janela?.goatcounter;
+  if (!contador) return false;
+  contador.count({ path: nome, event: true });
+  return true;
+}
+/* fim de medicao.ts */

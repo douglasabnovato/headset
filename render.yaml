@@ -1,5 +1,7 @@
 # Blueprint do Render: um único serviço web gratuito com a API e o front
 # (mesma origem para o cookie de sessão). O JWT_SECRET é gerado pelo Render.
+# Sem rootDir: o front fica na raiz e a API em server/ (workspace do npm), e o
+# build e o start rodam na raiz. /api/health consulta o banco (503 sem banco).
 services:
   - type: web
     name: headset-store
