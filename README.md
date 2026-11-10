@@ -9,7 +9,7 @@
 
 ## Estado e próximos passos (ciclo de 09/11/2026)
 
-**Estado:** Vitrine (N2), 7 de 12 critérios atendidos; **Finalizado: sim** do lado do código. O LCP local caiu de 3,40 s para 2,07 s; medir no site depende da publicação (#4). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
+**Estado:** Vitrine (N2), 8 de 12 critérios atendidos (a `main` está protegida desde 10/11/2026, #18); **Finalizado: sim** do lado do código. O LCP local caiu de 3,40 s para 2,07 s; medir no site depende da publicação (#4). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
 
 **O que foi feito no ciclo de 09/11/2026** (PR #30 para a `developer/sprint-2026-11-12`)
 - Esqueleto da vitrine no `index.html`, com a imagem do destaque; o React espera essa imagem contar como LCP antes de montar (até 2,5 s).
@@ -29,7 +29,6 @@
 - [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
 - [#26](https://github.com/douglasabnovato/headset/issues/26) Rodar `npm audit` no CI.
 - [#4](https://github.com/douglasabnovato/headset/issues/4) Publicar no Render (responsável).
-- [#18](https://github.com/douglasabnovato/headset/issues/18) Proteger a `main` (responsável).
 - [#19](https://github.com/douglasabnovato/headset/issues/19) Confirmar a meta da hipótese (responsável).
 - [#20](https://github.com/douglasabnovato/headset/issues/20) Medir o uso da demonstração (responsável).
 
