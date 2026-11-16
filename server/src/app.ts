@@ -17,6 +17,11 @@ import { rotasProdutos } from "./routes/products.js";
 import { rotasPedidos } from "./routes/orders.js";
 import { rotasRelatorios } from "./routes/reports.js";
 import { config } from "./config.js";
+import { count } from "drizzle-orm";
+import { products } from "./db/schema.js";
+
+/* Medição de uso (GoatCounter, decisão D5): script e envio da contagem. */
+const MEDICAO = { script: "https://gc.zgo.at", contagem: "https://douglasabnovato.goatcounter.com" };
 
 const SERVICOS_CEP = ["https://viacep.com.br", "https://brasilapi.com.br", "https://cdn.apicep.com", "https://apps.correios.com.br"];
 
@@ -35,8 +40,8 @@ export function criarApp({ db = criarDb(), cache = new Cache(), fila = new Fila(
       crossOriginResourcePolicy: { policy: "same-site" },
       contentSecurityPolicy: {
         directives: {
-          scriptSrc: ["'self'", ...(front?.hashesScripts ?? [])],
-          connectSrc: ["'self'", ...SERVICOS_CEP],
+          scriptSrc: ["'self'", MEDICAO.script, ...(front?.hashesScripts ?? [])],
+          connectSrc: ["'self'", ...SERVICOS_CEP, MEDICAO.contagem],
           imgSrc: ["'self'", "data:", "blob:", "https:"],
           styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
           fontSrc: ["'self'", "data:", "https://fonts.gstatic.com"],
@@ -49,7 +54,16 @@ export function criarApp({ db = criarDb(), cache = new Cache(), fila = new Fila(
   app.use(cookieParser());
   app.use(lerSessao);
 
-  app.get("/api/health", (_req, res) => res.json({ ok: true, demo: config.demo }));
+  /* Saúde que toca o banco: um /health que não consulta o banco não prova a conexão. */
+  app.get("/api/health", (_req, res) => {
+    try {
+      const linha = db.select({ n: count() }).from(products).get();
+      res.json({ ok: true, demo: config.demo, banco: "ok", produtos: linha?.n ?? 0 });
+    } catch (erro) {
+      console.error("[saúde] o banco não respondeu", erro);
+      res.status(503).json({ ok: false, demo: config.demo, banco: "fora" });
+    }
+  });
   app.use("/api/auth", rotasAuth(db, { limitarLogin }));
   app.use("/api/products", rotasProdutos(db, cache));
   app.use("/api", rotasPedidos(db, cache, fila));

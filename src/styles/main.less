@@ -145,6 +145,8 @@ body {
   &__imagem img { width: 100%; height: auto; max-width: 320px; margin-inline: auto; display: block; filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.18)); }
   &__titulo { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; margin: 0.75rem 0; small { font-weight: 500; color: var(--bs-secondary-color); } }
   &__oferta { color: var(--bs-secondary-color); }
+  /* Altura parecida com a do texto do destaque, para a página não pular quando a API responde */
+  &__detalhes--carregando { min-height: 18rem; display: flex; align-items: center; justify-content: center; }
   &__acoes { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1rem; }
   @media (max-width: 767px) { grid-template-columns: 1fr; text-align: center; &__acoes { justify-content: center; } }
 }

@@ -6,7 +6,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import request from "supertest";
 import { criarApp } from "../src/app.js";
-import { criarDb } from "../src/db/client.js";
+import { criarDb, type DB } from "../src/db/client.js";
 import { popular } from "../src/db/seed.js";
 import { products, orders } from "../src/db/schema.js";
 import { eq, count } from "drizzle-orm";
@@ -156,6 +156,31 @@ describe("relatórios", () => {
     expect(estados[0].totalCents).toBeGreaterThanOrEqual(estados.at(-1).totalCents);
     const top = (await admin.get("/api/reports/top-customers")).body.rows;
     expect(top.length).toBeLessThanOrEqual(5);
+  });
+});
+
+describe("saúde", () => {
+  it("consulta o banco e responde com o número de produtos", async () => {
+    const r = await request(ctx.app).get("/api/health");
+    expect(r.status).toBe(200);
+    expect(r.body).toMatchObject({ ok: true, banco: "ok" });
+    expect(r.body.produtos).toBeGreaterThan(0);
+  });
+
+  it("responde 503 quando o banco não responde", async () => {
+    const bancoFora = { select: () => { throw new Error("sem conexão"); } } as unknown as DB;
+    const r = await request(criarApp({ db: bancoFora, limitarLogin: false }).app).get("/api/health");
+    expect(r.status).toBe(503);
+    expect(r.body).toMatchObject({ ok: false, banco: "fora" });
+  });
+});
+
+/* Medição de uso (D5): a CSP libera só o script e o envio do GoatCounter. */
+describe("CSP da medição", () => {
+  it("libera o script e o envio do GoatCounter", async () => {
+    const csp = (await request(ctx.app).get("/api/health")).headers["content-security-policy"];
+    expect(csp).toMatch(/script-src[^;]*https:\/\/gc\.zgo\.at/);
+    expect(csp).toMatch(/connect-src[^;]*https:\/\/douglasabnovato\.goatcounter\.com/);
   });
 });
 /* fim de api.test.ts */

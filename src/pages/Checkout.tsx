@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import cep from "cep-promise";
 import { api, ApiError, type Pedido } from "../api/client";
 import { useAuth } from "../context/AuthContext";
+import { contarEvento } from "../lib/medicao";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../context/ToastContext";
 import { useCotacao } from "../hooks/useCotacao";
@@ -116,6 +117,7 @@ export default function Checkout() {
         pedido: r.order,
       });
       setConcluido(r.order);
+      contarEvento("compra-concluida");
       esvaziar();
       avisar(`Pedido #${r.order.id} confirmado!`);
       window.scrollTo({ top: 0, behavior: "smooth" });
