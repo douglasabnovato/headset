@@ -36,13 +36,14 @@ test("avisa a falha de rede e recupera com Tentar de novo", async ({ page }) => 
   await expect(page.getByText("Não foi possível carregar o catálogo")).toHaveCount(0);
 });
 
-test("mostra a mensagem de vazio quando a busca não acha nada", async ({ page }) => {
+test("mostra a mensagem de vazio quando o catálogo não tem produtos", async ({ page }) => {
+  /* Vitrine sem filtro: sem o mock, a API do seed devolveria produtos */
   await page.route(LISTAGEM, (rota) =>
     rota.fulfill({ json: { items: [], total: 0, page: 1, perPage: 12, pages: 0 } })
   );
-  await page.goto("/?q=nada-por-aqui");
+  await page.goto("/");
   await expect(page.getByText("Nenhum headphone encontrado")).toBeVisible();
-  await page.getByRole("button", { name: "Limpar filtros" }).last().click();
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator(".produto-card")).toHaveCount(0);
+  await expect(page.getByText("0 produtos encontrados")).toBeAttached();
 });
 /* fim de falhas.spec.ts */

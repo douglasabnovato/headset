@@ -17,7 +17,8 @@ async function violacoes(page: Page) {
 /* O app tem tema escuro de verdade: o Header lê prefers-color-scheme e grava data-bs-theme no <html> */
 for (const tema of ["light", "dark"] as const) {
   test.describe(`tema ${tema === "light" ? "claro" : "escuro"}`, () => {
-    test.use({ colorScheme: tema, viewport: { width: 1280, height: 800 } });
+    /* reducedMotion: o CSS desliga as animações, e o axe lê as cores finais (o aviso de "conta criada" entra com opacidade 0) */
+    test.use({ colorScheme: tema, viewport: { width: 1280, height: 800 }, reducedMotion: "reduce" });
 
     for (const caminho of ["/", "/carrinho", "/entrar", PRODUTO]) {
       test(`axe sem violações em ${caminho}`, async ({ page }) => {
@@ -65,11 +66,17 @@ test("adiciona ao carrinho só com o teclado, com foco visível", async ({ page 
   }
   expect(chegou).toBe(true);
   await page.waitForTimeout(300);
-  const foco = await botao.evaluate((b) => {
+  /* Foco visível: o contorno ou a sombra com foco precisam diferir do estilo do mesmo botão sem foco */
+  const estilo = () => botao.evaluate((b) => {
     const s = getComputedStyle(b);
-    return (s.outlineStyle !== "none" && parseFloat(s.outlineWidth) > 0) || s.boxShadow !== "none";
+    return `${s.outlineStyle} ${s.outlineWidth} ${s.outlineColor} | ${s.boxShadow}`;
   });
-  expect(foco).toBe(true);
+  const comFoco = await estilo();
+  await botao.evaluate((b) => (b as HTMLElement).blur());
+  await page.waitForTimeout(300);
+  const semFoco = await estilo();
+  expect(comFoco).not.toBe(semFoco);
+  for (let i = 0; i < 80 && !(await botao.evaluate((b) => b === document.activeElement)); i += 1) await page.keyboard.press("Tab");
   await page.keyboard.press("Enter");
   await expect(page.getByRole("link", { name: "Carrinho com 1 item" })).toBeVisible();
 });

@@ -136,7 +136,7 @@ Especificação completa (requisitos, modelo de dados, rotas e telas): [docs/ESP
 
 - **Testes da API** (13): cadastro e login, cookie `httpOnly`, 401/403 por papel, CRUD e validações, upload inválido, cache, cotação com preço do servidor, pedido com baixa de estoque, *rollback* quando falta estoque, isolamento do histórico por cliente, relatórios.
 - **Testes do front** (17): checkout (Luhn, validade, máscaras, campos obrigatórios), espera do destaque, medição de uso e resumo do carrinho.
-- **Testes de ponta a ponta** (15, Playwright): compra completa, carregamento, falha de rede e lista vazia na vitrine.
+- **Testes de ponta a ponta** (15, Playwright): compra completa (1); carregamento, falha de rede e catálogo vazio na vitrine (3); axe nos temas claro e escuro (10); adição ao carrinho só com o teclado, com foco visível (1).
 - **Acessibilidade**: axe-core (WCAG 2.0/2.1 A e AA) sem violações em vitrine, produto, carrinho, entrar e checkout, nos temas claro e escuro, e adição ao carrinho só com o teclado (telas logadas: #36); foco visível, "pular para o conteúdo", `aria-live` para avisos e erros, `aria-invalid` + `aria-describedby` nos campos.
 - **Segurança**: o CI falha com alerta alto ou crítico em dependência de produção (`npm audit --omit=dev --audit-level=high`) e só avisa sobre os demais.
 - **Performance**: rotas *lazy* (o checkout é um chunk próprio), imagens com dimensões e `loading="lazy"`, cache de listagem com invalidação, `ETag` com `Cache-Control: no-cache`, índices no banco, log de requisições acima de 300 ms.
