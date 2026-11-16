@@ -142,3 +142,48 @@ Sem mudança no problema, no público e na hipótese. Foco: o critério 7 (#15).
 **Segue em issue.** #15 até a medição no site, que depende da publicação (#4). #31 e #32 (agente). #18, #19, #20 (responsável).
 
 **Revisão independente (09/11/2026).** Um subagente leu só o diff, em duas rodadas. Corrigido: `aria-busy` na seção que tinha o aviso de carregamento; `/?utm_source=x` perdia o esqueleto; `className` apagava outras classes do `<html>`; esqueleto parado sem aviso se o JavaScript falhar. Aceito: com a API respondendo sem produto (e sem erro), o destaque ficaria carregando; a API devolve 404 nesse caso.
+
+## Ciclo de 16/11/2026
+
+> Branch `feature/2026-11-16`, criada da `developer/sprint-2026-11-19` (nova, a partir da `main` depois do merge do #29 em 16/11/2026). PR feature → sprint e PR sprint → `main`, este com `revisao-responsavel`. Nível: Vitrine (N2), 12 critérios.
+
+### Produto
+
+**Problema e público.** Sem mudança: recrutadores precisam ver, em poucos minutos, uma loja fullstack completa em TypeScript.
+
+**Hipótese e meta.** Sem mudança na aposta (decisão D1, revisável na #19). Este ciclo escreve o "saberemos quando", que faltava, com o evento `compra-concluida` do GoatCounter.
+
+**O que a pesquisa trouxe.**
+
+| Ideia | O que levamos para o projeto | Fonte |
+|---|---|---|
+| O axe roda dentro do Playwright e pode ser limitado às regras WCAG A e AA com `withTags`; teste automático não cobre tudo | O teste de acessibilidade passa a falhar com qualquer violação WCAG A/AA (antes, só "séria" ou "crítica"), nos temas claro e escuro, também no carrinho com item e no checkout | [Playwright: testes de acessibilidade](https://playwright.dev/docs/accessibility-testing) |
+| `page.route` intercepta a chamada à API e devolve resposta pronta (`fulfill`) | Testes de falha da vitrine: demora (carregamento), falha de rede com "Tentar de novo" e lista vazia | [Playwright: simular a API](https://playwright.dev/docs/mock) |
+| `npm audit --audit-level` só muda o limite que falha, e `--omit=dev` deixa de fora as dependências de desenvolvimento | Passo no CI que bloqueia alerta alto ou crítico de produção e outro que só avisa sobre o resto (#26) | [npm: `npm audit`](https://docs.npmjs.com/cli/v11/commands/npm-audit) |
+| Os alertas do Dependabot se ligam em Settings → Advanced Security | Passo a passo na issue nova do responsável; sem eles, o critério 9 fica "Parcial" (engenharia#33) | [GitHub: configurar alertas do Dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-alerts/configuring-dependabot-alerts) |
+
+**Backlog (impacto × esforço).**
+1. Honestidade do `MVP.md`: critério 9 sem os alertas do Dependabot, números de testes, evidência do critério 6 (alto impacto, pouco esforço).
+2. Testes de falha da vitrine e axe completo nos dois temas (alto, médio).
+3. `npm audit` no CI (#26) (médio, pouco).
+4. #31, #32 e #22 seguem em issue (médio, médio a alto).
+
+**Fora do escopo.** Publicar no Render (#4) e criar a conta do GoatCounter (#20): são do responsável.
+
+### Engenharia
+
+**Arquitetura.** Sem mudança: um serviço Express entrega a API e o front (mesma origem), SQLite com seed, Blueprint do Render em `render.yaml`.
+
+**Riscos.** Axe mais rigoroso pode achar violações antigas (achou uma: `definition-list` no resumo do carrinho). Testes de falha dependem do caminho `/api/products`; se a rota mudar, o teste quebra de forma visível.
+
+**Qualidade.** Vitest no front e na API; Playwright com a compra, falhas e axe (claro e escuro, 1280 × 800, dados do seed); `npm audit` no CI.
+
+**Definição de pronto.** CI verde no PR; `MVP.md` com cada "Atende" citando comando, data e resultado; revisão independente feita.
+
+### Plano de ação
+
+**Este ciclo executa.** Patch e minor das dependências de produção; `npm audit` no CI (#26); portas do Playwright trocáveis por variável; testes de falha; axe completo nos dois temas e a correção do `<dl>`; `MVP.md`, README e `DEPLOY.md`.
+
+**Vira issue.** Ligar os alertas do Dependabot (responsável). As demais seguem: #31, #32, #22, #15, #4, #19, #20.
+
+**Revisão independente (16/11/2026).** Um subagente leu só o diff do PR #37. Erros corrigidos: o axe lia o aviso de "conta criada" no meio da animação de opacidade e deixou o CI vermelho no tema claro (run 43817685167); os testes passam a usar `reducedMotion: "reduce"`, e o CSS já desliga a animação nesse caso. Números de testes no `MVP.md`, no README e no `DEPLOY.md` só valem com o CI verde (run 43818703076). Sugestões feitas: o vazio é testado na vitrine sem filtro; o foco visível compara o botão com e sem foco. Viraram issue: Esc no modal do admin (#36). Ficou como está, com o porquê: o aviso de frete grátis passou para depois do total, porque um `<p>` não pode ficar dentro do `<dl>`; o `role="status"` montado já com o texto existia antes e não muda neste ciclo.

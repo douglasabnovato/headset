@@ -39,16 +39,18 @@ export default function CartList({ cotacao, compacta = false }: { cotacao: Cotac
   );
 }
 
-/* Resumo de valores (subtotal, frete e total). */
+/* Resumo de valores (subtotal, frete e total). Os avisos ficam fora do <dl>, que só aceita dt e dd. */
 export function Resumo({ cotacao, carregando }: { cotacao: Cotacao | null; carregando: boolean }) {
   return (
-    <dl className="resumo mb-0" aria-busy={carregando}>
-      <div><dt>Subtotal</dt><dd>{cotacao ? moeda(cotacao.subtotalCents) : "—"}</dd></div>
-      <div><dt>Frete</dt><dd>{cotacao ? (cotacao.shippingCents ? moeda(cotacao.shippingCents) : "Grátis") : "—"}</dd></div>
-      {cotacao && cotacao.shippingCents > 0 && <p className="small text-body-secondary mb-2">Faltam {moeda(29900 - cotacao.subtotalCents)} para frete grátis.</p>}
-      <div className="resumo__total"><dt>Total</dt><dd>{cotacao ? moeda(cotacao.totalCents) : "—"}</dd></div>
-      {carregando && <p className="small mb-0" role="status"><span className="spinner-border spinner-border-sm me-1" aria-hidden="true" />Atualizando preços…</p>}
-    </dl>
+    <>
+      <dl className="resumo mb-0" aria-busy={carregando}>
+        <div><dt>Subtotal</dt><dd>{cotacao ? moeda(cotacao.subtotalCents) : "—"}</dd></div>
+        <div><dt>Frete</dt><dd>{cotacao ? (cotacao.shippingCents ? moeda(cotacao.shippingCents) : "Grátis") : "—"}</dd></div>
+        <div className="resumo__total"><dt>Total</dt><dd>{cotacao ? moeda(cotacao.totalCents) : "—"}</dd></div>
+      </dl>
+      {cotacao && cotacao.shippingCents > 0 && <p className="small text-body-secondary mt-2 mb-0">Faltam {moeda(29900 - cotacao.subtotalCents)} para frete grátis.</p>}
+      {carregando && <p className="small mt-2 mb-0" role="status"><span className="spinner-border spinner-border-sm me-1" aria-hidden="true" />Atualizando preços…</p>}
+    </>
   );
 }
 /* fim de CartList */
