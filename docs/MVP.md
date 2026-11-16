@@ -1,14 +1,14 @@
 # MVP — Headset Store
 
-> Fonte única do estado. Tabela atual no topo; as anteriores estão em "Histórico", no fim. Testado no Windows com Node 24 e no CI com Node 22. Não houve teste com pessoas nem em aparelho real.
+> Fonte única do estado. Tabela atual no topo; as anteriores estão em "Histórico", no fim. Testado no Windows com Node 24 e no CI com Node 22. Não houve teste com pessoas nem em aparelho real. Revisto em 16/11/2026, às 12h28: critério 9 com os alertas do Dependabot ligados.
 
 **Nível:** Vitrine (N2), 12 critérios.
 
-**Resumo:** 8 de 12 aplicáveis atendidos (1, 2, 4, 6, 8, 10, 11 e 12).
+**Resumo:** 9 de 12 aplicáveis atendidos (1, 2, 4, 6, 8, 9, 10, 11 e 12).
 
 **Finalizado:** sim
 
-O que o código resolve está feito. Os quatro critérios abertos dependem do responsável, cada um com issue `depende-do-responsavel`: 3 e 7 esperam a publicação no Render (#4, com a medição na #15); 5 espera a conta do GoatCounter (#20); 9 espera os alertas do Dependabot (#35). O resumo caiu de 9 para 8 por honestidade: o critério 9 estava "Atende" só pelo `npm audit`, e com os alertas desligados a regra pede "Parcial" (engenharia#33).
+O que o código resolve está feito. Os três critérios abertos dependem do responsável, cada um com issue `depende-do-responsavel`: 3 e 7 esperam a publicação no Render (#4, com a medição na #15); 5 espera a conta do GoatCounter (#20). O critério 9 voltou a "Atende" em 16/11/2026, depois que o responsável ligou os alertas do Dependabot (#35): 0 alertas abertos e audit de produção 0.
 
 ## Critérios em 16/11/2026 (ciclo de 16/11/2026: `feature/2026-11-16` → `developer/sprint-2026-11-19`)
 
@@ -22,7 +22,7 @@ O que o código resolve está feito. Os quatro critérios abertos dependem do re
 | 6 | Falhas tratadas | Atende | `e2e/falhas.spec.ts`, novo: carregamento com a API lenta, falha de rede com "Tentar de novo" e catálogo vazio na vitrine (`npx playwright test`, 16/11/2026: 3 de 3; CI do PR #37, [run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076): sucesso). Checkout com CEP fora do ar coberto pela compra (`e2e/compra.spec.ts`) | — |
 | 7 | Desempenho aceitável | Parcial | Só a medição local existe: Lighthouse 12.8.2 móvel, 09/11/2026, mediana de 2,07 s (5 execuções; TBT de 108 a 219 ms; LCP = imagem do esqueleto). No N2 só vale o site publicado, que não existe | #15, #4 |
 | 8 | Acessibilidade básica | Atende | `e2e/acessibilidade.spec.ts`: axe com as regras WCAG 2.0/2.1 A e AA, **sem nenhuma violação** (antes só as sérias), nos temas claro e escuro (o app tem tema escuro de verdade: `data-bs-theme` a partir de `prefers-color-scheme`, conferido no teste), 1280 × 800, dados do seed, em `/`, `/carrinho`, `/entrar`, `/produto/<slug>`, carrinho com item e checkout; adição ao carrinho só com Tab e Enter, com foco visível comparado ao botão sem foco (`npx playwright test`, 16/11/2026: 11 de 11; CI do PR #37, [run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076): sucesso). Esc não tem o que testar fora do admin (único modal), coberto na #36. O axe achou `definition-list` no resumo do carrinho, corrigido (`src/components/Resumo.test.tsx`) | #36 |
-| 9 | Segurança e conformidade | Parcial | `npm audit --omit=dev` e `npm audit`, 16/11/2026: "found 0 vulnerabilities"; o CI passa a rodar o audit (#26; [run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076): 0 vulnerabilidades). Mas `gh api "repos/douglasabnovato/headset/dependabot/alerts?state=open&per_page=100"`, 16/11/2026: 403, alertas desligados. Pela regra em decisão (engenharia#33), fica "Parcial" até ligar os alertas. Sem segredo no código (`JWT_SECRET` gerado pelo Render). SQLite volta aos dados de exemplo a cada deploy, aceito em demonstração | #35 |
+| 9 | Segurança e conformidade | Atende | `gh api "repos/douglasabnovato/headset/dependabot/alerts?state=open&per_page=100"`, 16/11/2026 12h00: 0 alertas abertos (alertas ligados pelo responsável nesse dia, #35). `npm audit --omit=dev` depois do `npm ci`, 16/11/2026 12h28: 0 vulnerabilidades na raiz e em `server`. O CI roda o audit (#26; [run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076): 0 vulnerabilidades). Sem segredo no código (`JWT_SECRET` gerado pelo Render). SQLite volta aos dados de exemplo a cada deploy, aceito em demonstração | #35 |
 | 10 | Entrega confiável | Atende | `gh api repos/douglasabnovato/headset/rules/branches/main`, 16/11/2026: `deletion`, `non_fast_forward`, `pull_request` e `required_status_checks` (`verificar`). O workflow `CI` roda nos PRs para `main` e `developer/**`; último CI da `main` (run 43799488509, 16/11/2026): sucesso | #18 |
 | 11 | Testes dos fluxos críticos | Atende | `npm test`, 16/11/2026: 17 testes do front (5 arquivos) e 13 da API. `npx playwright test`, 16/11/2026: 15 de ponta a ponta (compra, 3 de falha, 10 de axe e 1 de teclado). No CI do PR #37 ([run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076), job `verificar`, 16/11/2026): 17 + 13 + 15 passed, sem `skip` | — |
 | 12 | Documentação honesta | Atende | Uma tabela só; resumo batendo com ela (8 "Atende"); README com estado e próximos passos, comandos conferidos contra o `package.json` em 16/11/2026 | — |
@@ -38,6 +38,8 @@ O que o código resolve está feito. Os quatro critérios abertos dependem do re
 Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode mudar com a decisão do responsável.
 
 ## Histórico
+
+- 16/11/2026, 12h28: critério 9 de "Parcial" para "Atende". Antes, a API de alertas do Dependabot respondia 403 (alertas desligados, engenharia#33). Com os alertas ligados, 0 abertos e audit de produção 0. Resumo de 8 para 9 de 12.
 
 ### Tabela de 10/11/2026 (ciclo da faixa de 90%): 9 de 12 declarados, finalizado: sim
 
