@@ -1,5 +1,5 @@
 # CI do Headset Store: a cada push e pull request na main e nas developer/**, instala,
-# checa os tipos, roda os testes do front e da API e faz o build.
+# audita as dependências, checa os tipos, roda os testes do front e da API e faz o build.
 name: CI
 
 on:
@@ -21,6 +21,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      # Bloqueia: alerta alto ou crítico em dependência de produção (#26)
+      - run: npm audit --omit=dev --audit-level=high
+      # Só avisa: o audit completo, inclusive desenvolvimento, aparece no log e no resumo do run
+      - name: npm audit completo (aviso)
+        run: npm audit || echo "::warning title=npm audit::há alertas nas dependências; ver o log deste passo"
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
