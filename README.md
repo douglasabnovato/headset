@@ -7,40 +7,33 @@
   <img alt="Vitrine no celular, tema escuro" src="./docs/imagens/vitrine-escura-mobile.jpg" width="200">
 </p>
 
-## Estado e próximos passos (ciclo de 10/11/2026)
+## Estado e próximos passos (ciclo de 16/11/2026)
 
-**Estado:** Vitrine (N2), 9 de 12 critérios atendidos (a `main` está protegida desde 10/11/2026, #18); **Finalizado: sim** do lado do código. O LCP local caiu de 3,40 s para 2,07 s; medir no site depende da publicação (#4). Detalhes em [docs/MVP.md](docs/MVP.md). O site no Render deu 404 em 09/11/2026 (#4).
+**Estado:** Vitrine (N2), **8 de 12** critérios atendidos; **Finalizado: sim** do lado do código. Os quatro abertos dependem do responsável: publicar no Render (#4, critérios 3 e 7), criar a conta do GoatCounter (#20, critério 5) e ligar os alertas do Dependabot (#35, critério 9). O resumo caiu de 9 para 8 porque o critério 9 estava "Atende" só pelo `npm audit`. Detalhes em [docs/MVP.md](docs/MVP.md). O endereço `headset-store.onrender.com` deu 404 em 16/11/2026: o serviço ainda não existe.
 
-**O que foi feito em 10/11/2026** (PR feature → `developer/sprint-2026-11-12`)
-- `/api/health` consulta o banco (503 sem banco), pronto para o health check do Render.
-- Medição de uso pronta: GoatCounter sem cookie, só em produção, com o evento de compra concluída; a CSP libera só ele. Falta a conta (#20).
-- Meta da hipótese decidida pelo coordenador (decisão D1), revisável (#19).
+**O que foi feito em 16/11/2026** (PR feature → `developer/sprint-2026-11-19`; a `main` espera a revisão do responsável)
+- Axe sem nenhuma violação WCAG A/AA (antes só as sérias), nos temas claro e escuro, também no produto, no carrinho com item e no checkout. Ele achou um defeito real no resumo do carrinho, corrigido.
+- Testes de falha da vitrine: API lenta, falha de rede com "Tentar de novo" e lista vazia.
+- `npm audit` no CI: bloqueia alerta alto ou crítico de produção e só avisa sobre o resto (#26).
+- Patch e minor das dependências de produção; portas do Playwright trocáveis por variável.
 
-**O que foi feito no ciclo de 09/11/2026** (PR #30 para a `developer/sprint-2026-11-12`)
-- Esqueleto da vitrine no `index.html`, com a imagem do destaque; o React espera essa imagem contar como LCP antes de montar (até 2,5 s).
-- O destaque mostra a imagem antes da resposta da API.
-- LCP local (Lighthouse móvel, 5 execuções): mediana de 3,40 s antes e 2,07 s depois. CLS da vitrine: 0,64 para 0,01.
-
-**O que foi feito no ciclo de 07/11/2026** (PR para a `developer/sprint-2026-11-12`; a `main` espera a revisão do responsável)
-- Bootstrap por Sass, só com os módulos e utilitários usados: o CSS do build caiu de 240,69 KB para 136,42 KB (-43%; com gzip, -34%) (#21).
-- `npm audit` sem alertas, inclusive nas dependências de desenvolvimento: Vitest 4 e overrides de `esbuild` e `minimatch` (#23).
-- LCP medido antes e depois no build local: segue em cerca de 3,4 s; o gargalo é o JavaScript antes da imagem do destaque (#15).
-- `docs/MVP.md` com uma tabela só, a atual; as anteriores foram para "Histórico".
+**Ciclos anteriores** (já na `main` pelo PR #29, mesclado em 16/11/2026)
+- 10/11 (PR #34): `/api/health` consulta o banco; medição de uso com GoatCounter pronta; meta da hipótese (decisão D1).
+- 09/11 (PR #30): esqueleto da vitrine no `index.html`; LCP local de 3,40 s para 2,07 s.
+- 07/11 (PR #27): Bootstrap por Sass (-43% de CSS, #21); `npm audit` zerado com Vitest 4 (#23).
 
 **Próximos passos**
-- [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado (local: 2,07 s).
+- [#36](https://github.com/douglasabnovato/headset/issues/36) Rodar o axe nas telas logadas, nos dois temas.
 - [#31](https://github.com/douglasabnovato/headset/issues/31) Não baixar a imagem do destaque fora da vitrine.
 - [#32](https://github.com/douglasabnovato/headset/issues/32) CLS da página de produto até 0,1.
 - [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
-- [#26](https://github.com/douglasabnovato/headset/issues/26) Rodar `npm audit` no CI.
-- [#4](https://github.com/douglasabnovato/headset/issues/4) Publicar no Render pelo Blueprint (responsável; passo a passo na issue).
-- [#20](https://github.com/douglasabnovato/headset/issues/20) Criar a conta do GoatCounter `douglasabnovato` (responsável; o código já está pronto).
-- [#19](https://github.com/douglasabnovato/headset/issues/19) Revisar a meta da hipótese, decidida pelo coordenador em 10/11/2026 (responsável).
-- [#20](https://github.com/douglasabnovato/headset/issues/20) Medir o uso da demonstração (responsável).
+- [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado (local: 2,07 s).
+- Com o responsável: [#4](https://github.com/douglasabnovato/headset/issues/4) publicar no Render pelo Blueprint; [#20](https://github.com/douglasabnovato/headset/issues/20) criar a conta do GoatCounter; [#35](https://github.com/douglasabnovato/headset/issues/35) ligar os alertas do Dependabot; [#19](https://github.com/douglasabnovato/headset/issues/19) revisar a meta da hipótese.
 
 **Onde está a documentação**
-- [docs/MVP.md](docs/MVP.md): critérios e estado.
-- [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md): seções "Ciclo de 07/11/2026" e "Ciclo de 09/11/2026".
+- [docs/MVP.md](docs/MVP.md): critérios, evidências e hipótese.
+- [docs/PLANO-DE-ACAO.md](docs/PLANO-DE-ACAO.md): um plano por ciclo, o mais novo no fim ("Ciclo de 16/11/2026").
+- [docs/DEPLOY.md](docs/DEPLOY.md): publicação no Render, passo a passo.
 
 ## Sobre
 
@@ -82,7 +75,7 @@ Cartão de teste: `4111 1111 1111 1111`, validade futura (ex.: `12/30`), CVV `12
 | `npm run dev` | API (tsx watch) + front (Vite) juntos |
 | `npm test` | testes do front (Vitest) e da API (Vitest + Supertest, banco em memória) |
 | `npm run lint` | ESLint, sem avisos |
-| `npm run test:e2e` | compra de ponta a ponta, com API em memória e sem serviço externo |
+| `npm run test:e2e` | Playwright: compra, falhas da vitrine e axe nos dois temas, com API em memória e sem serviço externo (portas: `E2E_API_PORT` e `E2E_WEB_PORT`, padrão 3333 e 4173) |
 | `npm run build` | checagem de tipos + build de produção em `dist/` |
 | `npm run db:seed` | apaga e recria os dados de exemplo (rode com a API parada, para não servir cache antigo) |
 | `npm run typecheck` | tipos do front e da API |
@@ -91,13 +84,13 @@ Variáveis opcionais em `server/.env` (veja `.env.example`). Em produção, `JWT
 
 ## Em produção
 
-**Demonstração:** ainda não publicada (`headset-store.onrender.com` deu 404 em 06/11/2026, ver #4). O `render.yaml` está pronto, e o passo a passo está em `docs/DEPLOY.md`.
+**Demonstração:** ainda não publicada (`headset-store.onrender.com` deu 404 em 16/11/2026, ver #4). O `render.yaml` está pronto, e o passo a passo está em `docs/DEPLOY.md`.
 
 - Um único serviço gratuito no Render entrega a API e o front na mesma origem (o cookie de sessão continua `httpOnly` + `SameSite=Lax`, sem CORS).
 - Configuração em `render.yaml`: build com `npm ci --include=dev && npm run build`, início com `npm run start:prod`, health check em `/api/health`.
 - `DEMO=1` desliga o upload de imagens no admin (as contas de demonstração são públicas).
 - Limitações do plano gratuito: o serviço dorme após 15 minutos sem acesso e leva cerca de 1 minuto para acordar; o disco é temporário, então o banco volta aos dados de exemplo a cada reinício.
-- CI no GitHub Actions: lint, tipos, testes, build e testes de ponta a ponta a cada push e PR na `main` e nas `developer/**`.
+- CI no GitHub Actions: `npm audit`, lint, tipos, testes, build e testes de ponta a ponta a cada push e PR na `main` e nas `developer/**`. A `main` só aceita PR com o job `verificar` verde.
 - Passo a passo completo: [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Exercícios do teste
@@ -141,9 +134,11 @@ Especificação completa (requisitos, modelo de dados, rotas e telas): [docs/ESP
 
 ## Qualidade
 
-- **Testes da API** (10): cadastro e login, cookie `httpOnly`, 401/403 por papel, CRUD e validações, upload inválido, cache, cotação com preço do servidor, pedido com baixa de estoque, *rollback* quando falta estoque, isolamento do histórico por cliente, relatórios.
-- **Testes do front** (4): Luhn, validade, máscaras e obrigatoriedade de todos os campos do checkout.
-- **Acessibilidade**: axe-core (WCAG 2 A/AA) sem violações nas 8 telas principais, nos dois temas; foco visível, "pular para o conteúdo", `aria-live` para avisos e erros, `aria-invalid` + `aria-describedby` nos campos.
+- **Testes da API** (13): cadastro e login, cookie `httpOnly`, 401/403 por papel, CRUD e validações, upload inválido, cache, cotação com preço do servidor, pedido com baixa de estoque, *rollback* quando falta estoque, isolamento do histórico por cliente, relatórios.
+- **Testes do front** (17): checkout (Luhn, validade, máscaras, campos obrigatórios), espera do destaque, medição de uso e resumo do carrinho.
+- **Testes de ponta a ponta** (15, Playwright): compra completa, carregamento, falha de rede e lista vazia na vitrine.
+- **Acessibilidade**: axe-core (WCAG 2.0/2.1 A e AA) sem violações em vitrine, produto, carrinho, entrar e checkout, nos temas claro e escuro, e adição ao carrinho só com o teclado (telas logadas: #36); foco visível, "pular para o conteúdo", `aria-live` para avisos e erros, `aria-invalid` + `aria-describedby` nos campos.
+- **Segurança**: o CI falha com alerta alto ou crítico em dependência de produção (`npm audit --omit=dev --audit-level=high`) e só avisa sobre os demais.
 - **Performance**: rotas *lazy* (o checkout é um chunk próprio), imagens com dimensões e `loading="lazy"`, cache de listagem com invalidação, `ETag` com `Cache-Control: no-cache`, índices no banco, log de requisições acima de 300 ms.
 
 ## Estrutura
@@ -167,9 +162,3 @@ headset/
 
 ---
 Projeto de estudo · marcas, produtos e pagamentos fictícios · por [@douglasabnovato](https://github.com/douglasabnovato)
-
-## Próximos passos do responsável
-
-- Criar o serviço no Render com o `render.yaml` e conferir a demo.
-
-Acompanhamento na issue #4.
