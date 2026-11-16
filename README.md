@@ -9,7 +9,7 @@
 
 ## Estado e próximos passos (ciclo de 16/11/2026)
 
-**Estado:** Vitrine (N2), **8 de 12** critérios atendidos; **Finalizado: sim** do lado do código. Os quatro abertos dependem do responsável: publicar no Render (#4, critérios 3 e 7), criar a conta do GoatCounter (#20, critério 5) e ligar os alertas do Dependabot (#35, critério 9). O resumo caiu de 9 para 8 porque o critério 9 estava "Atende" só pelo `npm audit`. Detalhes em [docs/MVP.md](docs/MVP.md). O endereço `headset-store.onrender.com` deu 404 em 16/11/2026: o serviço ainda não existe.
+**Estado:** Vitrine (N2), **9 de 12** critérios atendidos; **Finalizado: sim** do lado do código. Os três abertos dependem do responsável: publicar no Render (#4, critérios 3 e 7) e criar a conta do GoatCounter (#20, critério 5). O critério 9 atende desde 16/11/2026: com os alertas do Dependabot ligados (#35), há 0 alertas abertos e o `npm audit --omit=dev` dá 0. Detalhes em [docs/MVP.md](docs/MVP.md). O endereço `headset-store.onrender.com` deu 404 em 16/11/2026: o serviço ainda não existe.
 
 **O que foi feito em 16/11/2026** (PR feature → `developer/sprint-2026-11-19`; a `main` espera a revisão do responsável)
 - Axe sem nenhuma violação WCAG A/AA (antes só as sérias), nos temas claro e escuro, também no produto, no carrinho com item e no checkout. Ele achou um defeito real no resumo do carrinho, corrigido.
@@ -28,7 +28,7 @@
 - [#32](https://github.com/douglasabnovato/headset/issues/32) CLS da página de produto até 0,1.
 - [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
 - [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado (local: 2,07 s).
-- Com o responsável: [#4](https://github.com/douglasabnovato/headset/issues/4) publicar no Render pelo Blueprint; [#20](https://github.com/douglasabnovato/headset/issues/20) criar a conta do GoatCounter; [#35](https://github.com/douglasabnovato/headset/issues/35) ligar os alertas do Dependabot; [#19](https://github.com/douglasabnovato/headset/issues/19) revisar a meta da hipótese.
+- Com o responsável: [#4](https://github.com/douglasabnovato/headset/issues/4) publicar no Render pelo Blueprint; [#20](https://github.com/douglasabnovato/headset/issues/20) criar a conta do GoatCounter; [#35](https://github.com/douglasabnovato/headset/issues/35) ligar os alertas do Dependabot (ligados em 16/11/2026, 0 alertas abertos; a issue fica para ele fechar); [#19](https://github.com/douglasabnovato/headset/issues/19) revisar a meta da hipótese.
 
 **Onde está a documentação**
 - [docs/MVP.md](docs/MVP.md): critérios, evidências e hipótese.
