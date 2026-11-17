@@ -1,6 +1,6 @@
 # MVP — Headset Store
 
-> Fonte única do estado. Tabela atual no topo; as anteriores estão em "Histórico", no fim. Testado no Windows com Node 24 e no CI com Node 22. Não houve teste com pessoas nem em aparelho real. Revisto em 16/11/2026, às 12h28: critério 9 com os alertas do Dependabot ligados.
+> Fonte única do estado. Tabela atual no topo; as anteriores estão em "Histórico", no fim. Testado no Windows com Node 24 e no CI com Node 22. Não houve teste com pessoas nem em aparelho real. Revisto em 17/11/2026, às 11h: limpeza do Histórico, com as tabelas antigas resumidas em texto, sem mudar nenhuma situação.
 
 **Nível:** Vitrine (N2), 12 critérios.
 
@@ -25,7 +25,7 @@ O que o código resolve está feito. Os três critérios abertos dependem do res
 | 9 | Segurança e conformidade | Atende | `gh api "repos/douglasabnovato/headset/dependabot/alerts?state=open&per_page=100"`, 16/11/2026 12h00: 0 alertas abertos (alertas ligados pelo responsável nesse dia, #35). `npm audit --omit=dev` depois do `npm ci`, 16/11/2026 12h28: 0 vulnerabilidades na raiz e em `server`. O CI roda o audit (#26; [run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076): 0 vulnerabilidades). Sem segredo no código (`JWT_SECRET` gerado pelo Render). SQLite volta aos dados de exemplo a cada deploy, aceito em demonstração | #35 |
 | 10 | Entrega confiável | Atende | `gh api repos/douglasabnovato/headset/rules/branches/main`, 16/11/2026: `deletion`, `non_fast_forward`, `pull_request` e `required_status_checks` (`verificar`). O workflow `CI` roda nos PRs para `main` e `developer/**`; último CI da `main` (run 43799488509, 16/11/2026): sucesso | #18 |
 | 11 | Testes dos fluxos críticos | Atende | `npm test`, 16/11/2026: 17 testes do front (5 arquivos) e 13 da API. `npx playwright test`, 16/11/2026: 15 de ponta a ponta (compra, 3 de falha, 10 de axe e 1 de teclado). No CI do PR #37 ([run 43818703076](https://github.com/douglasabnovato/headset/actions/runs/43818703076), job `verificar`, 16/11/2026): 17 + 13 + 15 passed, sem `skip` | — |
-| 12 | Documentação honesta | Atende | Uma tabela só; resumo batendo com ela (8 "Atende"); README com estado e próximos passos, comandos conferidos contra o `package.json` em 16/11/2026 | — |
+| 12 | Documentação honesta | Atende | Uma tabela só; resumo batendo com ela (9 "Atende", conferido em 17/11/2026); README com estado e próximos passos, comandos conferidos contra o `package.json` em 16/11/2026 | — |
 
 ## Problema e hipótese
 
@@ -39,91 +39,10 @@ Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode
 
 ## Histórico
 
-- 16/11/2026, 12h28: critério 9 de "Parcial" para "Atende". Antes, a API de alertas do Dependabot respondia 403 (alertas desligados, engenharia#33). Com os alertas ligados, 0 abertos e audit de produção 0. Resumo de 8 para 9 de 12.
-
-### Tabela de 10/11/2026 (ciclo da faixa de 90%): 9 de 12 declarados, finalizado: sim
-
-Revista em 16/11/2026: o critério 9 estava "Atende" só pelo `npm audit`, com os alertas do Dependabot desligados (hoje "Parcial"), e os números de testes do critério 11 estavam antigos.
-
-| # | Critério | Situação | Evidência (comando, data, resultado) ou o que falta | Issue |
-|---|---|---|---|---|
-| 1 | Problema e público claros | Atende | Uma frase, em "Problema e hipótese" abaixo | — |
-| 2 | Hipótese a validar | Atende | Atende: meta decidida pelo coordenador em 10/11/2026 (decisão D1), revisável pelo responsável. Aposta: quem avalia completa uma compra de demonstração em até 5 minutos pelo link publicado | #19 |
-| 3 | Fluxo principal completo | Parcial | Compra coberta pelo Playwright no CI (`npm run test:e2e`, job `verificar`). Código pronto para publicar: `render.yaml` e `/api/health` que consulta o banco (503 sem banco; `npx vitest run` em `server`, 10/11/2026: 13 de 13). Não está no ar: `curl -m 60 https://headset-store.onrender.com/api/health` deu 404 em 10/11/2026 | #4 |
-| 4 | Escopo enxuto | Atende | Teste técnico adaptado, sem pagamento real ("Fora do MVP") | — |
-| 5 | Medição de uso | Parcial | Código pronto; falta a conta (decisão D5). GoatCounter (`https://douglasabnovato.goatcounter.com/count`, sem cookie) só no build de produção e fora do Playwright, com o evento `compra-concluida`; a CSP do servidor libera só o script e o envio. `npx vitest run src/lib/medicao.test.ts`, 10/11/2026: 4 de 4. Falta também o site (#4) | #4, #20 |
-| 6 | Falhas tratadas | Atende | Catálogo, produto, pedidos e checkout com carregamento, erro e vazio; compra de ponta a ponta no CI | — |
-| 7 | Desempenho aceitável | Parcial | Lighthouse 12.8.2 local, móvel simulado, build de produção, `timeout 150`, 09/11/2026 (ciclo de 09/11). Antes (sprint): 3,43, 3,37, 3,58, 3,39 e 3,40 s (mediana 3,40 s), LCP = imagem do React, 2,0 a 2,5 s de atraso de renderização. Depois (PR #30, esqueleto no HTML): 2,07, 2,08, 2,05, 2,07 e 2,17 s (mediana **2,07 s**; TBT de 108 a 219 ms), LCP = imagem do esqueleto nas 5. Numa série com a máquina carregada (FCP observado de 1,6 a 1,8 s): 2,75, 2,77 e 2,08 s. No N2 só vale a medição no site, que não existe (#4, responsável) | #15, #4 |
-| 8 | Acessibilidade básica | Atende | Lighthouse acessibilidade 100 nas 6 execuções de 09/11/2026; axe sem violação séria em 3 telas e compra iniciada só com teclado (Playwright no CI) | — |
-| 9 | Segurança e conformidade | Atende | `npm audit` (todas as dependências, inclusive desenvolvimento), 09/11/2026: "found 0 vulnerabilities". SQLite perde dados a cada deploy, aceito em demonstração | #26 |
-| 10 | Entrega confiável | Atende | `gh api repos/douglasabnovato/headset/rulesets`, em 10/11/2026: ruleset `principal-protegida` ativo (exige PR, bloqueia force push e exclusão). O workflow `CI` roda nos PRs para `main` e `developer/**` | #18 |
-| 11 | Testes dos fluxos críticos | Atende | `npm test`, 09/11/2026: 11 testes do front (2 do destaque e 5 da espera do esqueleto, novos) e 10 da API passam (Vitest 4). 5 de ponta a ponta no CI do PR #30 | — |
-| 12 | Documentação honesta | Atende | Uma tabela só, resumo batendo com ela; README com estado e próximos passos | — |
-
-
-### Tabela de 09/11/2026 (ciclo de 09/11/2026): 8 de 12 atendidos, finalizado: sim
-
-| # | Critério | Situação | Evidência ou o que faltava | Issue |
-|---|---|---|---|---|
-| 2 | Hipótese a validar | Parcial | Meta proposta, sem confirmação | #19 |
-| 3 | Fluxo principal completo | Parcial | Fora do ar; `/api/health` não consultava o banco | #4 |
-| 5 | Medição de uso | Não atende | Sem site e sem ferramenta | #4, #20 |
-
-Os demais critérios seguiam como na tabela atual.
-
-
-### Tabela de 09/11/2026 (ciclo de 07/11/2026): 7 de 12 atendidos, finalizado: não
-
-| # | Critério | Situação | Evidência (comando, data, resultado) ou o que falta | Issue |
-|---|---|---|---|---|
-| 1 | Problema e público claros | Atende | Uma frase, em "Problema e hipótese" abaixo | — |
-| 2 | Hipótese a validar | Parcial | Meta proposta (compra de demonstração em até 5 minutos), sem confirmação | #19 |
-| 3 | Fluxo principal completo | Parcial | Compra coberta pelo teste de ponta a ponta. Não está no ar: `curl https://headset-store.onrender.com` deu 404 em 09/11/2026 | #4 |
-| 4 | Escopo enxuto | Atende | Teste técnico adaptado, sem pagamento real ("Fora do MVP") | — |
-| 5 | Medição de uso | Não atende | Sem site e sem ferramenta | #4, #20 |
-| 6 | Falhas tratadas | Atende | Catálogo, produto, pedidos e checkout com carregamento, erro e vazio; compra de ponta a ponta no CI | — |
-| 7 | Desempenho aceitável | Não atende | Lighthouse 12.8.2 local, móvel simulado, build de produção, 09/11/2026. Com o Bootstrap inteiro: LCP 3,67 / 3,68 / 3,47 s. Com o Bootstrap reduzido: 3,44 / 3,39 / 3,37 s e, numa segunda série, 3,62 / 3,25 / 3,54 s (mediana 3,44 s). O elemento do LCP é a imagem do destaque, e 80% do tempo é atraso de renderização: o JavaScript e a chamada à API vêm antes. Reduzir o CSS não resolveu | #15 |
-| 8 | Acessibilidade básica | Atende | Lighthouse acessibilidade 100 nas 6 execuções de 09/11/2026; axe sem violação séria em 3 telas e compra iniciada só com teclado (Playwright no CI) | — |
-| 9 | Segurança e conformidade | Atende | `npm audit` (todas as dependências, inclusive desenvolvimento), 09/11/2026: "found 0 vulnerabilities". SQLite perde dados a cada deploy, aceito em demonstração | #26 |
-| 10 | Entrega confiável | Parcial | CI verde nos PRs, também para `developer/**`; a `main` segue sem proteção | #18 |
-| 11 | Testes dos fluxos críticos | Atende | `npm test`, 09/11/2026: 4 testes do front e 10 da API passam (Vitest 4). 5 de ponta a ponta no CI | — |
-| 12 | Documentação honesta | Atende | Uma tabela só, resumo batendo com ela; README com estado e próximos passos | — |
-
-**CSS do Bootstrap (#21), `npx vite build`, 09/11/2026:** de 240,69 KB (gzip 33,63 KB) para 136,42 KB (gzip 22,06 KB): -43% sem gzip e -34% com gzip. Conferido que as 155 classes do Bootstrap citadas no código seguem no CSS novo, e telas de vitrine, carrinho e checkout vistas nos temas claro e escuro.
-
-### Revisão de 06/11/2026 (ciclo de 03/11/2026): 6 de 12 atendidos
-
-Antes deste ciclo: 5 de 12. O resumo dizia "3 de 12" com 6 "Atende" na tabela, então o critério 12 era "Parcial".
-
-| # | Critério | Como verificar | Situação em 06/11/2026 |
-|---|---|---|---|
-| 1 | Problema e público claros | Dá para explicar em uma frase | Atende |
-| 2 | Hipótese a validar | Existe uma aposta escrita, com meta | Parcial: meta proposta, sem confirmação (#19) |
-| 3 | Fluxo principal completo | Uma pessoa conclui sem ajuda | Parcial: compra coberta pelo teste de ponta a ponta; **não está no ar** (404 em 06/11, #4) |
-| 4 | Escopo enxuto | O que não entra está registrado | Atende: teste técnico adaptado, sem pagamento real (seção 3) |
-| 5 | Medição de uso | A métrica principal é coletada | Não atende: sem site e sem ferramenta (#4, #20) |
-| 6 | Falhas tratadas | Erro, vazio e carregamento têm resposta clara | Atende: catálogo, produto, pedidos e checkout têm carregamento, erro e vazio; a compra de ponta a ponta passa no CI |
-| 7 | Desempenho aceitável | LCP de até 2,5 s no celular | Não atende: 2,79 s em teste local de 02/11 (3,10, 2,79 e 2,26 s). Sem site publicado, não houve medição em 06/11 (#15). O CSS inteiro do Bootstrap bloqueia a primeira pintura (#21) |
-| 8 | Acessibilidade básica | Lighthouse e teclado | Atende: Lighthouse 100 em 02/11; axe sem violação séria em 3 telas e compra iniciada só com teclado, no CI (5 testes Playwright passando em 06/11) |
-| 9 | Segurança e conformidade | Riscos decididos; termos de terceiros cumpridos | Parcial: `npm audit --omit=dev` sem alertas; restam alertas moderados de desenvolvimento no Vitest 3 e no `drizzle-kit` (#23). SQLite perde dados a cada deploy, aceitável em demonstração |
-| 10 | Entrega confiável | Publicação só depois de CI verde | Parcial: CI verde nos PRs, agora também para `developer/**`; a `main` segue sem proteção (#18) |
-| 11 | Testes dos fluxos críticos | Testes automatizados no CI | Atende: 4 testes do front, 10 da API e 5 de ponta a ponta (compra e acessibilidade) no CI |
-| 12 | Documentação honesta | Qualquer pessoa roda o projeto, e os números estão certos | Atende: resumo corrigido em 06/11; README com estado e próximos passos |
-
-**Finalizado: não.** Faltam os critérios 7 (#21, e a medição da #15) e 9 (#23), que o código resolve. Os critérios 2 (#19), 3 (#4), 5 (#20) e 10 (#18) dependem do responsável.
-
-Tarefas em 06/11/2026:
-
-| # | Tarefa | Situação |
-|---|---|---|
-| 1 | Publicar no Render e conferir a demo | Com o responsável (#4) |
-| 2 | Adicionar lint | Feito |
-| 3 | Criar teste de ponta a ponta da compra | Feito |
-| 4 | Playwright 1.65 e CI nas `developer/**` | Feito em 06/11 |
-| 5 | Reduzir o CSS do Bootstrap | Issue #21 |
-| 6 | Compra como convidado | Issue #22 |
-
-### Medições anteriores
-
-- **02/11/2026:** build local, LCP de 3,39 s e depois 2,79 s (fonte só no `load`), acessibilidade 100. Lighthouse 12.8.2 local, perfil móvel simulado, sem aparelho real.
-- **06/11/2026:** `https://headset-store.onrender.com` respondeu 404. Sem site publicado, o LCP no ar não foi medido.
+- 17/11/2026: limpeza, sem reavaliar critério. As tabelas antigas do Histórico viraram as linhas abaixo, para o arquivo ter uma tabela de critérios só, um resumo e um finalizado. A evidência do critério 12 dizia "8 Atende"; a tabela tem 9, e o texto foi corrigido.
+- 16/11/2026, 12h28: critério 9 de "Parcial" para "Atende". Antes, a API de alertas do Dependabot respondia 403 (alertas desligados, engenharia#33). Com os alertas ligados, 0 abertos e audit de produção 0. Resumo de 8 para 9 de 12. No mesmo ciclo, o critério 8 passou a usar o axe completo (WCAG A e AA) nos temas claro e escuro, e o 6 ganhou `e2e/falhas.spec.ts`.
+- 10/11/2026 (ciclo da faixa de 90%): 9 de 12 declarados, finalizado sim. Mudou: hipótese com meta decidida pelo coordenador (D1, #19), `main` protegida (#18), `/api/health` consultando o banco, GoatCounter pronto no código (#20) e LCP local de 2,07 s com o esqueleto no HTML (PR #30). Revista em 16/11/2026: o 9 só tinha o `npm audit`, com os alertas desligados, e o 11 tinha números de testes antigos.
+- 09/11/2026 (ciclo de 09/11/2026): 8 de 12, finalizado sim. Diferia por 2 Parcial (meta sem confirmação), 3 Parcial (`/api/health` sem banco) e 5 Não atende.
+- 09/11/2026 (ciclo de 07/11/2026): 7 de 12, finalizado não. 7 Não atende (LCP local mediano de 3,44 s, com atraso de renderização) e 10 Parcial (`main` sem proteção). O CSS do Bootstrap caiu de 240,69 KB para 136,42 KB (#21), sem resolver o LCP.
+- 06/11/2026 (ciclo de 03/11/2026): 6 de 12, finalizado não; antes do ciclo, 5 de 12. O resumo dizia "3 de 12" com 6 "Atende" e foi corrigido. 7 Não atende (2,79 s local em 02/11) e 9 Parcial (alertas de desenvolvimento no Vitest 3 e no `drizzle-kit`, #23). Tarefas do ciclo: lint, teste de ponta a ponta da compra e Playwright 1.65 com CI nas `developer/**` feitos; publicação com o responsável (#4); Bootstrap (#21) e compra como convidado (#22) viraram issues.
+- 02/11/2026: build local com LCP de 3,39 s e depois 2,79 s (fonte só no `load`), acessibilidade 100 (Lighthouse 12.8.2, móvel simulado, sem aparelho real). Em 06/11/2026, `https://headset-store.onrender.com` respondeu 404, sem medição no ar.
