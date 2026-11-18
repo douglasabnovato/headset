@@ -7,11 +7,15 @@
   <img alt="Vitrine no celular, tema escuro" src="./docs/imagens/vitrine-escura-mobile.jpg" width="200">
 </p>
 
-## Estado e próximos passos (ciclo de 16/11/2026)
+## Estado e próximos passos (ciclo de 18/11/2026)
 
 **Estado:** Vitrine (N2), **9 de 12** critérios atendidos; **Finalizado: sim** do lado do código. Os três abertos dependem do responsável: publicar no Render (#4, critérios 3 e 7) e criar a conta do GoatCounter (#20, critério 5). O critério 9 atende desde 16/11/2026: com os alertas do Dependabot ligados (#35), há 0 alertas abertos e o `npm audit --omit=dev` dá 0. Detalhes em [docs/MVP.md](docs/MVP.md). O endereço `headset-store.onrender.com` deu 404 em 16/11/2026: o serviço ainda não existe.
 
-**O que foi feito em 16/11/2026** (PR feature → `developer/sprint-2026-11-19`; a `main` espera a revisão do responsável)
+**O que foi feito em 18/11/2026** (PR feature → `developer/sprint-2026-11-19`; a `main` espera a revisão do responsável)
+- Página de produto sem saltos: CLS de 0,26 para 0 com a API lenta; a imagem do destaque só é baixada na vitrine (#31, #32).
+- Axe nas telas logadas (pedidos e admin), nos dois temas, e Esc no modal do admin com o foco de volta (#36).
+
+**Feito em 16/11/2026** (na `main` pelo PR #38)
 - Axe sem nenhuma violação WCAG A/AA (antes só as sérias), nos temas claro e escuro, também no produto, no carrinho com item e no checkout. Ele achou um defeito real no resumo do carrinho, corrigido.
 - Testes de falha da vitrine: API lenta, falha de rede com "Tentar de novo" e lista vazia.
 - `npm audit` no CI: bloqueia alerta alto ou crítico de produção e só avisa sobre o resto (#26).
@@ -23,10 +27,7 @@
 - 07/11 (PR #27): Bootstrap por Sass (-43% de CSS, #21); `npm audit` zerado com Vitest 4 (#23).
 
 **Próximos passos**
-- [#36](https://github.com/douglasabnovato/headset/issues/36) Rodar o axe nas telas logadas, nos dois temas.
-- [#31](https://github.com/douglasabnovato/headset/issues/31) Não baixar a imagem do destaque fora da vitrine.
-- [#32](https://github.com/douglasabnovato/headset/issues/32) CLS da página de produto até 0,1.
-- [#22](https://github.com/douglasabnovato/headset/issues/22) Compra como convidado.
+- [#31](https://github.com/douglasabnovato/headset/issues/31), [#32](https://github.com/douglasabnovato/headset/issues/32) e [#36](https://github.com/douglasabnovato/headset/issues/36): feitas na sprint, fecham no merge na `main`.
 - [#15](https://github.com/douglasabnovato/headset/issues/15) Medir o LCP no site publicado (local: 2,07 s).
 - Com o responsável: [#4](https://github.com/douglasabnovato/headset/issues/4) publicar no Render pelo Blueprint; [#20](https://github.com/douglasabnovato/headset/issues/20) criar a conta do GoatCounter; [#35](https://github.com/douglasabnovato/headset/issues/35) ligar os alertas do Dependabot (ligados em 16/11/2026, 0 alertas abertos; a issue fica para ele fechar); [#19](https://github.com/douglasabnovato/headset/issues/19) revisar a meta da hipótese.
 
@@ -135,9 +136,9 @@ Especificação completa (requisitos, modelo de dados, rotas e telas): [docs/ESP
 ## Qualidade
 
 - **Testes da API** (13): cadastro e login, cookie `httpOnly`, 401/403 por papel, CRUD e validações, upload inválido, cache, cotação com preço do servidor, pedido com baixa de estoque, *rollback* quando falta estoque, isolamento do histórico por cliente, relatórios.
-- **Testes do front** (17): checkout (Luhn, validade, máscaras, campos obrigatórios), espera do destaque, medição de uso e resumo do carrinho.
-- **Testes de ponta a ponta** (15, Playwright): compra completa (1); carregamento, falha de rede e catálogo vazio na vitrine (3); axe nos temas claro e escuro (10); adição ao carrinho só com o teclado, com foco visível (1).
-- **Acessibilidade**: axe-core (WCAG 2.0/2.1 A e AA) sem violações em vitrine, produto, carrinho, entrar e checkout, nos temas claro e escuro, e adição ao carrinho só com o teclado (telas logadas: #36); foco visível, "pular para o conteúdo", `aria-live` para avisos e erros, `aria-invalid` + `aria-describedby` nos campos.
+- **Testes do front** (18): checkout (Luhn, validade, máscaras, campos obrigatórios), espera do destaque, medição de uso e resumo do carrinho.
+- **Testes de ponta a ponta** (26, Playwright): compra completa (1); carregamento, falha de rede e catálogo vazio na vitrine (3); axe nos temas claro e escuro nas telas abertas (10) e nas logadas, pedidos e admin (4); adição ao carrinho só com o teclado e Esc no modal do admin (2); CLS do produto e da vitrine filtrada e imagem do destaque só na vitrine (6).
+- **Acessibilidade**: axe-core (WCAG 2.0/2.1 A e AA) sem violações em vitrine, produto, carrinho, entrar, checkout, pedidos e admin, nos temas claro e escuro; adição ao carrinho e modal do admin só com o teclado; foco visível, "pular para o conteúdo", `aria-live` para avisos e erros, `aria-invalid` + `aria-describedby` nos campos.
 - **Segurança**: o CI falha com alerta alto ou crítico em dependência de produção (`npm audit --omit=dev --audit-level=high`) e só avisa sobre os demais.
 - **Performance**: rotas *lazy* (o checkout é um chunk próprio), imagens com dimensões e `loading="lazy"`, cache de listagem com invalidação, `ETag` com `Cache-Control: no-cache`, índices no banco, log de requisições acima de 300 ms.
 
