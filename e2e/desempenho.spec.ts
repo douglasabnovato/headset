@@ -24,7 +24,12 @@ async function medirCls(page: Page) {
   });
   return async () => {
     /* Espera as imagens da tela e dois quadros, para os últimos deslocamentos entrarem na conta */
-    await page.waitForFunction(() => Array.from(document.images).every((i) => i.complete));
+    /* Só as imagens na tela: as lazy fora da tela ficam com complete === false */
+    await page.waitForFunction(() =>
+      Array.from(document.images)
+        .filter((i) => { const r = i.getBoundingClientRect(); return r.bottom > 0 && r.top < innerHeight && r.width > 0; })
+        .every((i) => i.complete)
+    );
     await page.evaluate(() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.waitForTimeout(300);
     return page.evaluate(() => (window as unknown as { __cls: number }).__cls);
@@ -68,7 +73,8 @@ function contarImagemDestaque(page: Page) {
   return pedidos;
 }
 
-/* Rotas em que nenhum produto da tela usa a imagem do destaque (o Kitty Quartz é gamer) */
+/* Rotas em que nenhum produto da tela usa a imagem do destaque (o Kitty Quartz é gamer).
+   Confere a primeira carga, até o "load": o alvo é o <img> do HTML (#31) */
 for (const caminho of ["/carrinho", "/produto/vortex-x5-preto-e-vermelho", "/?type=on-ear"]) {
   test(`não baixa a imagem do destaque em ${caminho}`, async ({ page }) => {
     const pedidos = contarImagemDestaque(page);
@@ -83,15 +89,30 @@ test("na vitrine sem filtros, o esqueleto pinta a imagem do destaque antes do Re
   const pedidos = contarImagemDestaque(page);
   /* Segura o JavaScript da loja: o que aparece é só o HTML do esqueleto */
   let liberar: () => void = () => {};
+  let segurou = false;
   const espera = new Promise<void>((resolve) => (liberar = resolve));
   await page.route(/\/assets\/index-[^/]+\.js$/, async (rota) => {
+    segurou = true;
     await espera;
     await rota.continue();
+  });
+  /* Guarda o elemento de cada entrada de LCP */
+  await page.addInitScript(() => {
+    const w = window as unknown as { __lcp: Element[] };
+    w.__lcp = [];
+    new PerformanceObserver((lista) => {
+      for (const e of lista.getEntries() as (PerformanceEntry & { element: Element | null })[]) if (e.element) w.__lcp.push(e.element);
+    }).observe({ type: "largest-contentful-paint", buffered: true });
   });
   await page.goto("/", { waitUntil: "commit" });
   const img = page.locator("#app-shell img");
   await expect(img).toHaveAttribute("src", IMAGEM_DESTAQUE);
   await expect.poll(() => img.evaluate((i: HTMLImageElement) => i.complete && i.naturalWidth > 0)).toBe(true);
+  /* O JavaScript da loja ficou mesmo retido, e a imagem do esqueleto virou o LCP antes dele */
+  expect(segurou).toBe(true);
+  await expect
+    .poll(() => page.evaluate(() => (window as unknown as { __lcp: Element[] }).__lcp.some((el) => el === document.querySelector("#app-shell img"))))
+    .toBe(true);
   liberar();
   await expect(page.locator(".produto-card").first()).toBeVisible();
   expect(pedidos.length).toBeGreaterThanOrEqual(1);

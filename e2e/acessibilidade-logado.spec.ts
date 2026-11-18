@@ -55,7 +55,7 @@ async function entrarComoAdmin(page: Page) {
   await page.goto("/entrar?voltar=%2Fadmin%2Fprodutos");
   await page.locator('[name="email"]').fill(ADMIN.email);
   await page.locator('[name="password"]').fill(ADMIN.senha);
-  await page.locator('#conteudo form button[type="submit"]').click();
+  await page.locator("#conteudo").getByRole("button", { name: "Entrar", exact: true }).click();
   await page.waitForURL(/admin\/produtos/);
   await expect(page.getByRole("table")).toBeVisible();
 }
