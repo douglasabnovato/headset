@@ -24,7 +24,7 @@ export default function Produto() {
     if (p) document.title = `${p.name} ${p.color} · Headset Store`;
   }, [p]);
 
-  if (carregando) return <Carregando texto="Carregando produto…" />;
+  if (carregando) return <ProdutoCarregando />;
   if (erro || !p) return <Vazio titulo={erro?.status === 404 ? "Produto não encontrado" : "Não foi possível carregar"} texto={erro?.message} acao={<Link to="/" className="btn btn-primary">Ver catálogo</Link>} />;
 
   const noCarrinho = itens.find((i) => i.produto.id === p.id)?.quantidade ?? 0;
@@ -69,6 +69,20 @@ export default function Produto() {
         </button>
       </div>
     </article>
+  );
+}
+/* Carregamento com a mesma grade da página: a imagem (quadrada) e a coluna de texto já ocupam o espaço, e o conteúdo não empurra a tela (#32). */
+function ProdutoCarregando() {
+  return (
+    <div className="produto row g-4 align-items-start">
+      <div className="col-12" aria-hidden="true"><div className="esqueleto esqueleto--trilha" /></div>
+      <div className="col-md-6" aria-hidden="true">
+        <div className="produto__imagem"><div className="esqueleto esqueleto--imagem" /></div>
+      </div>
+      <div className="col-md-6 produto__texto-carregando">
+        <Carregando texto="Carregando produto…" />
+      </div>
+    </div>
   );
 }
 /* fim de Produto */
