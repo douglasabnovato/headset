@@ -129,6 +129,8 @@ body {
 .navbar-nav .nav-link,
 .tema-btn { white-space: nowrap; }
 #conteudo:focus { outline: none; }
+/* O rodapé começa abaixo da dobra: quando o conteúdo chega da API, ele desce fora da tela e não conta no CLS (#32) */
+#conteudo { min-height: 100vh; }
 .rodape { border-top: 1px solid var(--bs-border-color-translucent); }
 
 // Destaque (card original do projeto Headset)
@@ -258,6 +260,11 @@ fieldset.card legend { float: none; width: auto; }
 .barra { height: 10px; background: var(--bs-secondary-bg); border-radius: 999px; overflow: hidden; span { display: block; height: 100%; background: var(--bs-primary); border-radius: 999px; } }
 
 // Estados
+.esqueleto { background: var(--bs-secondary-bg); border-radius: @raio; }
+.esqueleto--trilha { height: 1.5rem; width: 14rem; max-width: 100%; }
+/* Mesmo tamanho da imagem do produto (quadrada, até 420 px) */
+.esqueleto--imagem { aspect-ratio: 1; width: 100%; max-width: 420px; margin-inline: auto; background: transparent; }
+.produto__texto-carregando { min-height: 24rem; }
 .carregando { display: flex; gap: 0.5rem; align-items: center; justify-content: center; padding: 3rem 0; color: var(--bs-secondary-color); }
 .vazio { text-align: center; padding: 3rem 1rem; &__icone { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; } }
 .avisos {
