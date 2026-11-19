@@ -56,7 +56,10 @@
       <!-- Esqueleto da vitrine, trocado pelo React: a imagem do destaque (o LCP) pinta antes do JavaScript (#15). Mesmas classes da página. -->
       <div id="app-shell" aria-hidden="true">
         <header class="topo sticky-top"><nav class="navbar navbar-expand-lg"><div class="container"><span class="navbar-brand marca"><span class="marca__icone">🎧</span> Headset<span class="marca__store">store</span></span><span class="navbar-toggler"><span class="navbar-toggler-icon"></span></span></div></nav></header>
-        <main class="container py-4"><section class="destaque"><div class="destaque__imagem"><img src="/produtos/kitty-quartz.png" alt="" width="249" height="223" fetchpriority="high" /></div><div class="destaque__detalhes destaque__detalhes--carregando"></div></section></main>
+        <main class="container py-4"><section class="destaque"><div class="destaque__imagem"><img alt="" width="249" height="223" fetchpriority="high" /><script>
+          /* O src só entra na vitrine sem filtros: um <img> oculto ainda é baixado, e fora dela seriam 54 KB sem uso (#31) */
+          if (!document.documentElement.classList.contains("no-shell")) document.currentScript.previousElementSibling.src = "/produtos/kitty-quartz.png";
+        </script></div><div class="destaque__detalhes destaque__detalhes--carregando"></div></section></main>
       </div>
     </div>
     <script type="module" src="/src/index.tsx"></script>

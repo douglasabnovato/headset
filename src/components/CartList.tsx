@@ -49,7 +49,8 @@ export function Resumo({ cotacao, carregando }: { cotacao: Cotacao | null; carre
         <div className="resumo__total"><dt>Total</dt><dd>{cotacao ? moeda(cotacao.totalCents) : "—"}</dd></div>
       </dl>
       {cotacao && cotacao.shippingCents > 0 && <p className="small text-body-secondary mt-2 mb-0">Faltam {moeda(29900 - cotacao.subtotalCents)} para frete grátis.</p>}
-      {carregando && <p className="small mt-2 mb-0" role="status"><span className="spinner-border spinner-border-sm me-1" aria-hidden="true" />Atualizando preços…</p>}
+      {/* Região viva sempre montada, só com o texto trocado: o leitor de tela anuncia a mudança (#36) */}
+      <p className={`small mb-0 ${carregando ? "mt-2" : ""}`} role="status">{carregando && <><span className="spinner-border spinner-border-sm me-1" aria-hidden="true" />Atualizando preços…</>}</p>
     </>
   );
 }

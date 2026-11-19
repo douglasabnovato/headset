@@ -25,7 +25,20 @@ describe("Resumo", () => {
     const { container } = render(<Resumo cotacao={null} carregando={false} />);
     expect(container.querySelectorAll("dd")).toHaveLength(3);
     expect(container.textContent).toContain("—");
-    expect(container.querySelector("p")).toBeNull();
+    expect(screen.getByRole("status").textContent).toBe("");
+    expect(screen.queryByText(/para frete grátis/)).toBeNull();
+  });
+
+  it("mantém a mesma região viva montada e só troca o texto (#36)", () => {
+    const { rerender } = render(<Resumo cotacao={cotacao} carregando={false} />);
+    const regiao = screen.getByRole("status");
+    expect(regiao.textContent).toBe("");
+    rerender(<Resumo cotacao={cotacao} carregando />);
+    expect(screen.getByRole("status")).toBe(regiao);
+    expect(regiao.textContent).toContain("Atualizando preços");
+    rerender(<Resumo cotacao={cotacao} carregando={false} />);
+    expect(screen.getByRole("status")).toBe(regiao);
+    expect(regiao.textContent).toBe("");
   });
 });
 /* fim de Resumo.test.tsx */
