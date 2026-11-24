@@ -10,6 +10,13 @@
 
 O que o código resolve está feito. Os três critérios abertos dependem do responsável, cada um com issue `depende-do-responsavel`: 3 e 7 esperam a publicação no Render (#4, com a medição na #15); 5 espera a conta do GoatCounter (#20). O critério 9 voltou a "Atende" em 16/11/2026, depois que o responsável ligou os alertas do Dependabot (#35): 0 alertas abertos e audit de produção 0.
 
+## Produto
+
+- **Problema:** recrutadores precisam ver uma loja fullstack completa em TypeScript, da vitrine ao pedido com transação e fila.
+- **Público:** recrutadores e quem avalia o portfólio.
+- **Hipótese:** acreditamos que quem avalia o portfólio completa uma compra de demonstração em até 5 minutos pelo link publicado. Saberemos quando, nas 4 primeiras semanas com o site no ar, o GoatCounter mostrar pelo menos 1 `compra-concluida` para cada 5 visitas à vitrine, e uma sessão observada terminar a compra em até 5 minutos.
+- **Métrica:** eventos `compra-concluida` por visitas à vitrine, medido por GoatCounter, e tempo da compra numa sessão observada — meta: 1 para cada 5 visitas nas 4 primeiras semanas no ar, e compra em até 5 minutos. Meta decidida pelo coordenador em 10/11/2026 (D1) e proporção escrita em 16/11/2026, ambas revisáveis pelo responsável (#19). Depende da publicação (#4) e da conta (#20).
+
 ## Critérios em 18/11/2026 (ciclo de 18/11/2026: `feature/2026-11-18` → `developer/sprint-2026-11-19`)
 
 | # | Critério | Situação | Evidência (comando, data, resultado) ou o que falta | Issue |
@@ -39,6 +46,7 @@ Pagamento real, banco persistente e estoque real. A lista é uma proposta e pode
 
 ## Histórico
 
+- 20/11/2026: bloco Produto padronizado, sem mudar critérios.
 - 18/11/2026: ciclo das issues #31, #32 e #36, sem mudar nenhuma situação. CLS do produto de 0,26 para 0 e imagem do destaque só na vitrine; axe nas telas logadas e Esc no modal do admin. Testes de 15 para 26 de ponta a ponta.
 - 17/11/2026: limpeza, sem reavaliar critério. As tabelas antigas do Histórico viraram as linhas abaixo, para o arquivo ter uma tabela de critérios só, um resumo e um finalizado. A evidência do critério 12 dizia "8 Atende"; a tabela tem 9, e o texto foi corrigido.
 - 16/11/2026, 12h28: critério 9 de "Parcial" para "Atende". Antes, a API de alertas do Dependabot respondia 403 (alertas desligados, engenharia#33). Com os alertas ligados, 0 abertos e audit de produção 0. Resumo de 8 para 9 de 12. No mesmo ciclo, o critério 8 passou a usar o axe completo (WCAG A e AA) nos temas claro e escuro, e o 6 ganhou `e2e/falhas.spec.ts`.
